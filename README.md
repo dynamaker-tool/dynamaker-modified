@@ -9,7 +9,7 @@ Created through JavaScript.
 # Supported Platforms
 Windows (64-bit)
 
-macOS (64-bit), Windows (32-bit) will be implemented in the future
+macOS (64-bit) will be implemented in the future
 
 # Creators
 Jmak, Jono997, Vertrak, TLC

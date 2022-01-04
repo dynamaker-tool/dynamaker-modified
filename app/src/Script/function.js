@@ -1967,7 +1967,28 @@ function getFrameNumberOutOf60FromMs(currMs) {
 	return Math.floor((currMs / 1000) * 60);
 }
 
+/*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*
+**Vertrak started here!
+*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*(╯°□°）╯︵ ┻━┻*/
 
+//scale canvas to fit
+function refit()
+{
+	//get game canvas
+	can = document.getElementById("can");
+	
+	trans = "translate(-50%, -50%) scale(";
+	
+	//check restricting dimension
+	if((16/9) < (window.innerWidth/window.innerHeight))
+		can.style.transform = trans + (window.innerHeight / 1080) + ")";
+	else
+		can.style.transform = trans + (window.innerWidth / 1920) + ")";
+}
+
+/**┬─┬﻿ ︵ /(.□. \）*****┬─┬﻿ ︵ /(.□. \）*****┬─┬﻿ ︵ /(.□. \）*****┬─┬﻿ ︵ /(.□. \）**
+**Vertrak left here!
+**┬─┬﻿ ︵ /(.□. \）*****┬─┬﻿ ︵ /(.□. \）*****┬─┬﻿ ︵ /(.□. \）*****┬─┬﻿ ︵ /(.□. \）**/
 
 
 

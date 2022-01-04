@@ -233,6 +233,11 @@ ctx = canvas.getContext("2d");
 ctx.font = "30px Dynamix";
 ctx.textBaseline = "top";
 
+//Vertrak started here! (╯°□°）╯︵ ┻━┻
+canvas.id = "can";
+window.addEventListener("resize", refit);
+refit();
+//Vertrak left here! ┬─┬﻿ ︵ /(.□. \）
 
 mixerSrc = new Image();
 mixerSrc.src = "Graphics/MIXshadow.png";

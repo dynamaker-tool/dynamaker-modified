@@ -193,7 +193,7 @@ settingsForNewMapScene.prototype = {
 				err += "每分钟小节数数据无效; "
 			}
 			if (! offsetName || isNaN(Number(offsetName.value))) {
-				err += " 延迟/偏移(秒); "
+				err += " 延迟/偏移(秒)"
 			}
 		}
 

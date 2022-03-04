@@ -237,7 +237,7 @@ startMenuScene.prototype = {
 		ctx.font = "15px Dynamix,NotoSans";
 		ctx.textAlign = "right";
 		ctx.fillText("©资源版权为 C4Cat 所有", windowWidth * 0.96, windowHeight * 0.05);
-		ctx.fillText("特别鸣谢：AXIS5, Syncable 和 whitelava3203", windowWidth * 0.23, windowHeight * 0.05);
+		ctx.fillText("特别鸣谢：AXIS5, Syncable 和 whitelava3203", windowWidth * 0.226, windowHeight * 0.05);
 		ctx.fillText("中文翻译：AXIS5 和 Jmak", windowWidth * 0.134, windowHeight * 0.08);
 
 		ctx.font = "180px Dynamix";

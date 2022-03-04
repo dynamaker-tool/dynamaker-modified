@@ -224,7 +224,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix,NotoSans";
-			ctx.fillText("推薦使用採樣頻率 48000Hz的 .wav 音頻文件以減少延遲和幀頻相關問題", windowWidth * 0.5, windowHeight * 0.80)
+			ctx.fillText("推薦使用採樣頻率 48000Hz 的 .wav 音頻文件以減少延遲和幀頻相關問題", windowWidth * 0.5, windowHeight * 0.80)
 		}
 
 		ctx.fillStyle = "#0FF";
@@ -237,7 +237,7 @@ startMenuScene.prototype = {
 		ctx.font = "15px Dynamix,NotoSans";
 		ctx.textAlign = "right";
 		ctx.fillText("©資產版權所有歸屬 C4Cat", windowWidth * 0.96, windowHeight * 0.05);
-		ctx.fillText("特別鳴謝： AXIS5, Syncable 和 whitelava3203", windowWidth * 0.23, windowHeight * 0.05);
+		ctx.fillText("特別鳴謝：AXIS5, Syncable 和 whitelava3203", windowWidth * 0.226, windowHeight * 0.05);
 		ctx.fillText("中文翻譯：AXIS5 和 Jmak", windowWidth * 0.134, windowHeight * 0.08);
 
 		ctx.font = "180px Dynamix";

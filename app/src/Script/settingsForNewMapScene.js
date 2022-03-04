@@ -187,13 +187,13 @@ settingsForNewMapScene.prototype = {
 		err = "";
 		if (window) {
 			if (! musicName || musicName.value == "") {
-				err += "音乐名称不能为空; "
+				err += "音樂名稱不能為空; "
 			}
 			if (! bpmName || isNaN(Number(bpmName.value)) || Number(bpmName.value) <= 0) {
-				err += "每分钟小节数数据无效; "
+				err += "每分鐘小節數數據無效; "
 			}
 			if (! offsetName || isNaN(Number(offsetName.value))) {
-				err += " 延迟/偏移(秒); "
+				err += " 延遲/偏移(秒); "
 			}
 		}
 
@@ -211,22 +211,22 @@ settingsForNewMapScene.prototype = {
 			ctx.fillRect(windowWidth * 0.11, windowHeight * 0.28, windowWidth * 0.3, windowHeight * 0.1);
 			ctx.fillStyle = "#000";
 			ctx.font = "40px Dynamix,NotoSans";
-			ctx.fillText("开始", windowWidth * 0.23, windowHeight * 0.34);
+			ctx.fillText("開始", windowWidth * 0.23, windowHeight * 0.34);
 		}
 		else {
 			ctx.font = "40px Dynamix,NotoSans";
-			ctx.fillText("开始", windowWidth * 0.23, windowHeight * 0.34);
+			ctx.fillText("開始", windowWidth * 0.23, windowHeight * 0.34);
 		}
 		//Jmak - BPM and BPM Text
 		ctx.fillStyle = "#0FF";
-		ctx.fillText("音乐名称", windowWidth * 0.11, windowHeight * 0.24);
-		ctx.fillText("难度", windowWidth * 0.11, windowHeight * 0.45);
-		ctx.fillText("左边", windowWidth * 0.11, windowHeight * 0.635);
+		ctx.fillText("音樂名稱", windowWidth * 0.11, windowHeight * 0.24);
+		ctx.fillText("難度", windowWidth * 0.11, windowHeight * 0.45);
+		ctx.fillText("左邊", windowWidth * 0.11, windowHeight * 0.635);
 		ctx.textAlign = "right";
 		//ctx.fillText("BeatPerMinute", windowWidth * 0.71, windowHeight * 0.263);
-		ctx.fillText("每分钟的小节数", windowWidth * 0.88, windowHeight * 0.263);
-		ctx.fillText("延迟/偏移(秒)", windowWidth * 0.88, windowHeight * 0.45);
-		ctx.fillText("右边", windowWidth * 0.88, windowHeight * 0.635);
+		ctx.fillText("每分鐘的小節數", windowWidth * 0.88, windowHeight * 0.263);
+		ctx.fillText("延遲/偏移(秒)", windowWidth * 0.88, windowHeight * 0.45);
+		ctx.fillText("右邊", windowWidth * 0.88, windowHeight * 0.635);
 		
 		// TLC Back Button - Button Graphic
 		drawBox(ctx, windowWidth * 0.11, windowHeight * 0.8, windowWidth * 0.15, windowHeight * 0.05, 0.8, 10);
@@ -245,7 +245,7 @@ settingsForNewMapScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix,NotoSans";
 		ctx.textAlign = "center";
-		ctx.fillText("每分钟小节数 = BPM (每分钟节拍数) ÷ 4", windowWidth * 0.5, windowHeight - 85);
+		ctx.fillText("每分鐘小節數 = BPM (每分鐘節拍數) ÷ 4", windowWidth * 0.5, windowHeight - 85);
 
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix,NotoSans";

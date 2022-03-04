@@ -1,0 +1,51 @@
+DynaMaker Update Changelog 更新日誌
+Modified by TLChicken, Jmak, Vertrak, keanucode and Jono997 由上述修改
+Originally by omegaPi 由omegaPi創建, BPM change function created by whitelava3203 BPM修改工具由whitelava3203創建
+
+Supported Platforms 支援平台
+Windows (64-bit), macOS (64-bit)
+
+1.21.3 (1/9/2021)
+- Reduced app size for Windows 減少Windows程式大小
+	- 421MB -> 63MB
+- Added Tera(T) and None(U) difficulty 添加Tera和None難度
+	- None is the equivalent of Custom in the website version None難度是對應網頁版的Custom難度
+- Adjusted help and app menu in Editor Mode for guidance 修改幫助和程式menu的製譜器提示
+	- Press H/Alt>Edit to invoke and to show controls 在鍵盤上按下H/Alt>Edit就會顯示不同的快捷鍵
+- Fixed several options in the right-click menu 對右鍵的畫面進行修改
+	- Greyed out option [2] and [3] in the # category within the right-click menu 將右鍵裡#的[2] [3]變成灰色
+- Limited Hispeed to 0.1-6.0 限制Hispeed速度至0.1-6.0
+- Fixed window scaling issue 修復視窗縮放問題 (Windows)
+- Fixed font issue, manually installing the font is no longer required 修復字形問題，不再需要自行安裝字形
+- Some visual changes 一些視覺上的改動
+	- Changed the opacity and font size for the song title and difficulty 更改透明度和字形大小
+	- Reduced the width of the blur for the lines on all 3 side lanes and the progression scrubber 減少三邊線和音樂進度條模糊的寬度
+	- Updated assets to a higher resolution 提高圖片資源畫質
+	- Changed Mixer reaction time 更新Mixer反應時間
+- Credited whitelava3203 for original BPM changer
+
+
+1.21.2.2 (26/4/2021)
+- MacOS support 支援MacOS
+- Added NotoSans support (song title that isn't supported with Orbitron, user will require to install manually) 添加NotoSans字形支援（Orbitron不支援的歌曲名稱就會用NotoSans，要自行安裝）
+- Changed icon 更新圖標
+- Disabled F for fullscreen 已修復F全屏會導致視窗的問題
+- Hid unneeded/unusable buttons in the menu 已隱藏不需要的Menu按鈕
+- Fixed crash issue after setting playback speed lower than 0.1 / higher than 15.0 已修復播放速度調整至0.1/15.0會導致黑屏的問題
+
+1.21.2 (5/4/2021)
+- "Orbitron" font is now used only for song title 添加Orbitron字形支援（歌曲名稱）
+- Added progression scrubber support 添加音樂進度條
+- Hit Sound and Particles were turned off at the start 按鍵聲，note效果會默認關掉
+- Launch speed is now 1.4 by default 下落速度已默認成1.4
+- Fixed and revamped BPM change window 已修復以及重新設計修改BPM的視窗
+- Fixed cursor issue 已修復滑鼠問題
+
+1.21.1 (19/3/2021)
+- Changed the menu screen from Dynamix Editor to DynaMaker 更改主頁面的標題
+- Removed Dynamix Zone Beta from the menu screen 從主頁面刪除Dynamix Zone Beta
+- Confirmed Windowed Mode support 確認視窗模式
+- Changed some grammar in the descriptions 已更改英語的語法問題
+
+1.21.0 (19/3/2021)
+- Initial Release 初版推出

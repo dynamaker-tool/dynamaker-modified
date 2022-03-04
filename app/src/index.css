@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Dynamix";
+  src: url("./fonts/DynamixFeatureStandard.ttf");
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("./fonts/Orbitron.otf");
+}
+
+@font-face {
+  font-family: "NotoSans";
+  src: url("./fonts/NotoSansCJKkr-Black.otf");
+}
+
+body {
+  font-family: Dynamix;
+  /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;*/
+  margin: auto;
+  max-width: 38rem;
+  padding: 2rem;
+}

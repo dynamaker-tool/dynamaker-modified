@@ -190,7 +190,7 @@ settingsForNewMapScene.prototype = {
 				err += "音樂名稱不能為空; "
 			}
 			if (! bpmName || isNaN(Number(bpmName.value)) || Number(bpmName.value) <= 0) {
-				err += "每分鐘小節數數據無效"
+				err += "每分鐘小節數數據無效; "
 			}
 			if (! offsetName || isNaN(Number(offsetName.value))) {
 				err += " 延遲/偏移(秒); "

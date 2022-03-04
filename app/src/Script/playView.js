@@ -329,7 +329,7 @@ playView.prototype = {
 			if (musicCtrl.paused) {
 				ctx.fillStyle = "#0F0";
 			}
-			ctx.fillText(offset + " 小節線延遲/偏移 (O- P+)", windowWidth, windowHeight - 30);
+			ctx.fillText(offset + " 小節延遲/偏移 (O- P+)", windowWidth, windowHeight - 30);
 			ctx.fillText(musicCtrl.currentTime.toFixed(3) + " 秒 (音樂)", windowWidth, windowHeight - 55);
 
 			ctx.fillText((hiSpeed/1000).toFixed(1) + " x 下落速度 (Q- E+)", windowWidth*0.80, windowHeight - 30);

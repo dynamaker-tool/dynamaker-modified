@@ -199,7 +199,7 @@ function mouse(canvas) {
 										}
 										case 2:
 										{
-											//savefixbpm(); //TLC rm functionality
+											savefixbpm(); //TLC rm functionality
 											break;
 										}
 									}

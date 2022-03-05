@@ -342,9 +342,9 @@ playView.prototype = {
 				ctx.textAlign = "left";
 				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
 				//Left Region
-				ctx.fillText("(B) 鼠標滾輪方向", windowWidth*0.26, windowHeight - 80);
-				ctx.fillText("(Z) 鎖定/解鎖小節", windowWidth*0.26, windowHeight - 55);
-				ctx.fillText("(X) 鎖定/解鎖X軸", windowWidth*0.26, windowHeight - 30);
+				ctx.fillText("(B) 鼠標滾輪方向", windowWidth*0.24, windowHeight - 80);
+				ctx.fillText("(Z) 長按鎖定/解鎖小節", windowWidth*0.24, windowHeight - 55);
+				ctx.fillText("(X) 長按鎖定/解鎖X軸", windowWidth*0.24, windowHeight - 30);
 				//Middle Region
 				ctx.fillText("(←↓→)  小節線", windowWidth*0.38, windowHeight - 80);
 				ctx.fillText("(C- V+) ±小節切分數", windowWidth*0.38, windowHeight - 55);
@@ -1484,7 +1484,7 @@ playView.prototype = {
 					if(editSide==3)
 					{
 						basicMenu[1][0]="[1]  變速";
-						basicMenu[2][0]="[2]  無";
+						basicMenu[2][0]="[2]  另存為 Dynamite";
 						basicMenu[3][0]="[3]  無";
 					}
 					else if(editSide==0||editSide==1||editSide==2)
@@ -1554,7 +1554,7 @@ playView.prototype = {
 					//basicMenu[12][0] = "     Mixer " + (restrictMixerHeight ? "ABOVE" : "BELOW") + " 0.4";
 					basicMenu[13][0] = "     粒子特效 " + (showParticles ? "開" : "關");
 					basicMenu[14][0] = "     打擊聲" + (showHitSound ? "量 " + Math.round(hitSoundGainNode.gain.value * 100) + "%" : " 關");
-					basicMenu[15][0] = "     音樂聲量 " + Math.round(musicCtrl.volume * 100) + "%";
+					basicMenu[15][0] = "     音量 " + Math.round(musicCtrl.volume * 100) + "%";
 					if (musicCtrl) {
 						if (musicCtrl.paused) {
 							basicMenu[5][0] = "[_]  播放";

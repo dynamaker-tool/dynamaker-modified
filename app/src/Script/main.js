@@ -218,7 +218,7 @@ var errorMsgContainer = [];
 
 //TLC Options
 /** false: Arrow keys toggle 2 options of bar lines instead of 3. The solid bar line option is left out. */
-var includeSolidBarLine = false;
+var includeSolidBarLine = true;
 
 //----------------------------------------------//
 

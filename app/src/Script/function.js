@@ -1737,7 +1737,7 @@ function hitAnime(place, type, width, x, frames) {
 			//Jmak w/ Special Guest - Particles Revamp
 			//Bottom
 			//Purple
-			var shootFrame = 24;
+			var shootFrame = 20;
 			for (var i = 4; i < Math.ceil(width / 30 + 0.1); ++i) {
 				//sx1 = x - width/2 + Math.random()*width;
 				sx1 = x;
@@ -1752,7 +1752,7 @@ function hitAnime(place, type, width, x, frames) {
 				sx2 = sx1 - (Math.cos(sv) * shootRange * (Math.random() * 2.7 + 0.6));
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
-			shootRange = 6;
+			shootRange = 4;
 			//White
 			var shootFrame = 6;
 			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
@@ -1781,7 +1781,7 @@ function hitAnime(place, type, width, x, frames) {
 			break;
 		case 1:
 			//Left
-			var shootFrame = 24;
+			var shootFrame = 20;
 			for (var i = 0; i < Math.ceil(width / 30 +0.1); ++i) {
 			//Jmak w/ Special Guest - Particles Revamp
 			//Purple
@@ -1799,7 +1799,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy2 = sy1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
-			shootRange = 6;
+			shootRange = 4;
 			//White
 			var shootFrame = 6;
 			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
@@ -1838,7 +1838,7 @@ function hitAnime(place, type, width, x, frames) {
 			//Jmak w/ Special Guest - Particles Revamp
 			//Right
 			//Purple
-			var shootFrame = 24;
+			var shootFrame = 20;
 			for (var i = 0; i < Math.ceil(width / 30+0.1); ++i) {
 			//Purple
 				sx1 = windowWidth - lr;
@@ -1855,7 +1855,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy2 = sy1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);	
 			}
-			shootRange = 6;	
+			shootRange = 4;	
 			//White
 			var shootFrame = 6;
 			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {

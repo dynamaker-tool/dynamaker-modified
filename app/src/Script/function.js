@@ -1781,7 +1781,7 @@ function hitAnime(place, type, width, x, frames) {
 			break;
 		case 1:
 			//Left
-			var shootFrame = 20;
+			var shootFrame = 18;
 			for (var i = 0; i < Math.ceil(width / 30 +0.1); ++i) {
 			//Jmak w/ Special Guest - Particles Revamp
 			//Purple
@@ -1838,7 +1838,7 @@ function hitAnime(place, type, width, x, frames) {
 			//Jmak w/ Special Guest - Particles Revamp
 			//Right
 			//Purple
-			var shootFrame = 20;
+			var shootFrame = 18;
 			for (var i = 0; i < Math.ceil(width / 30+0.1); ++i) {
 			//Purple
 				sx1 = windowWidth - lr;

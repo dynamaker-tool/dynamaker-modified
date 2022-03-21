@@ -1096,7 +1096,7 @@ playView.prototype = {
 								break;
 							case 2: // White
 							//	ctx.globalAlpha = 0.95 (0.35) - 0.95*Math.pow(shadowRate, 2.5);
-								ctx.globalAlpha = 0.45 - 0.45 *Math.pow(shadowRate, 1.5);
+								ctx.globalAlpha = 0.55 - 0.55 *Math.pow(shadowRate, 1.5);
 								ctx.drawImage(whiteParticleCanvas, -58, -73);
 							default:
 								break;

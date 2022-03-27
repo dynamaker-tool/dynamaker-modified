@@ -262,7 +262,7 @@ barCanvas = document.createElement("canvas"); barContext = barCanvas.getContext(
 playCanvas = document.createElement("canvas"); playContext = playCanvas.getContext("2d"); playCanvas.width = 2048; playCanvas.height = 1320;
 numberCanvas = document.createElement("canvas"); numberContext = numberCanvas.getContext("2d"); numberCanvas.width = 1541; numberCanvas.height = 176;
 bgCanvas = document.createElement("canvas"); bgContext = bgCanvas.getContext("2d"); bgCanvas.width = 1920; bgCanvas.height = 1080;
-hardshipCanvas = document.createElement("canvas"); hardshipContext = hardshipCanvas.getContext("2d"); hardshipCanvas.width = 380; hardshipCanvas.height = 215;
+hardshipCanvas = document.createElement("canvas"); hardshipContext = hardshipCanvas.getContext("2d"); hardshipCanvas.width = 380; hardshipCanvas.height = 262;
 //charCanvas = document.createElement("canvas"); charContext = charCanvas.getContext("2d"); charCanvas.width = 1920; charCanvas.height = 1080;
 holdNoteCanvasD = document.createElement("canvas"); holdNoteContextD = holdNoteCanvasD.getContext("2d"); holdNoteCanvasD.width = 512; holdNoteCanvasD.height = 256;
 holdNoteCanvasL = document.createElement("canvas"); holdNoteContextL = holdNoteCanvasL.getContext("2d"); holdNoteCanvasL.width = 256; holdNoteCanvasL.height = 512;
@@ -293,7 +293,7 @@ mixerShadowCanvasR = document.createElement("canvas"); mixerShadowContextR = mix
 
 imgLoad(playSrc, function() {
 	barContext.drawImage(playSrc, 0, 152, 79, 234, 0, 0, 79, 234);
-	hardshipContext.drawImage(playSrc, 0, 416, 380, 215, 0, 0, 380, 215);
+	hardshipContext.drawImage(playSrc, 0, 416, 380, 262, 0, 0, 380, 262);
 	perfectJudgeContext.drawImage(playSrc, 951, 203, 438, 153, 0, 0, 438, 153);
 	perfectShineContext.drawImage(playSrc, 913, 0, 514, 201, 0, 0, 514, 201);
 	

@@ -290,11 +290,9 @@ playView.prototype = {
 				}
 				case "GIGA": {
 					hardshipCut = 4;
-
 					break;
-
 				}
-				case "CUSTOM": {
+				case "HORNEEE": {
 					hardshipCut = 5;
 					break;
 				}
@@ -306,14 +304,17 @@ playView.prototype = {
 					hardshipCut = 7;
 					break;
 				}
-				case "HORNEEE": {
+				case "CUSTOM": {
 					hardshipCut = 8;
 					break;
 				}
+
 			}
 
-			if (hardshipCut <= 5) {
-				ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
+			if (hardshipCut <= 4) {
+				ctx.drawImage(hardshipCanvas, 0, 43 * hardshipCut, 190, 43, windowWidth * 0.022, windowHeight - ud + 77, 190, 43);
+			} else if (hardshipCut == 5) {
+				ctx.drawImage(hardshipCanvas, 0, 43 * hardshipCut, 218, 47, windowWidth * 0.022, windowHeight - ud + 77, 218, 47);
 			} else {
 				ctx.drawImage(hardshipCanvas, 190, 43*(hardshipCut - 6), 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
 			}
@@ -607,7 +608,7 @@ playView.prototype = {
 
 		//TLC Edits List for playView.js:
 		/**
-		 Changed right click menu 4th side option 2 and 3 to be Grey color.
+		 Changed right click menu 4th side option 3 to be Grey color.
 		 Changed position of display and activation of Volume Slider.
 
 		 Changed auto Mixer response time to behave more like in Dynamix.
@@ -682,7 +683,9 @@ playView.prototype = {
 						dis2 = windowHeight - ud +100;
 					}
 					if (dis <= 0) {
-						shootParticle(10 + Math.floor(Math.random()*24), 1, x + (Math.random() - 0.5)*width, windowHeight - ud, Math.random()*360, x + (Math.random()*2 - 1)*width*2, windowHeight - ud + (Math.random() - 0.5)*2*ud*2, (Math.random() - 0.5)*180);
+						if (modifyParticlesInNextFrame) {
+							shootParticle(8 + Math.floor(Math.random() * 24), 1, x + (Math.random() - 0.5) * width, windowHeight - ud, Math.random() * 360, x + (Math.random() * 2 - 1) * width * 2, windowHeight - ud + (Math.random() - 0.5) * 2 * ud * 2, (Math.random() - 0.5) * 180);
+						}
 						extra = 180 - Math.round(- dis) % 180;
 						dis = 0;
 					}
@@ -749,7 +752,9 @@ playView.prototype = {
 						dis2 = windowWidth - lr +100;
 					}
 					if (dis <= 0) {
-						shootParticle(10 + Math.floor(Math.random()*24), 1, lr, x + (Math.random() - 0.5)*width, Math.random()*360, lr + (Math.random() - 0.5)*2*ud*2, x + (Math.random() - 0.5)*2*width*2, (Math.random() - 0.5)*180);
+						if (modifyParticlesInNextFrame) {
+							shootParticle(8 + Math.floor(Math.random() * 24), 1, lr, x + (Math.random() - 0.5) * width, Math.random() * 360, lr + (Math.random() - 0.5) * 2 * ud * 2, x + (Math.random() - 0.5) * 2 * width * 2, (Math.random() - 0.5) * 180);
+						}
 						extra = 180 - Math.round(- dis) % 180;
 						dis = 0;
 					}
@@ -838,7 +843,9 @@ playView.prototype = {
 						dis2 = windowWidth - lr +100;
 					}
 					if (dis <= 0) {
-						shootParticle(10 + Math.floor(Math.random()*24), 1, windowWidth - lr, x + (Math.random() - 0.5)*width, Math.random()*360, windowWidth - lr + (Math.random() - 0.5)*2*ud*2, x + (Math.random() - 0.5)*2*width*2, (Math.random() - 0.5)*180);
+						if (modifyParticlesInNextFrame) {
+							shootParticle(8 + Math.floor(Math.random() * 24), 1, windowWidth - lr, x + (Math.random() - 0.5) * width, Math.random() * 360, windowWidth - lr + (Math.random() - 0.5) * 2 * ud * 2, x + (Math.random() - 0.5) * 2 * width * 2, (Math.random() - 0.5) * 180);
+						}
 						extra = 180 - Math.round(- dis) % 180;
 						dis = 0;
 					}
@@ -987,8 +994,10 @@ playView.prototype = {
 				ctx.globalAlpha = 1;
 				t = 0;
 			}
-			if (mixerLT > 0) mixerLT--;
-			if (mixerRT > 0) mixerRT--;
+			if (modifyParticlesInNextFrame) {
+				if (mixerLT > 0) mixerLT--;
+				if (mixerRT > 0) mixerRT--;
+			}
 
 
 
@@ -1479,7 +1488,7 @@ playView.prototype = {
 					var preSide = editSide;
 
 					basicMenu[1][3] = ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) ? rgba(128, 128, 128, 0.8) : rgba(0, 255, 255, 0.8);
-					basicMenu[2][3] = ((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD")) || (editSide == 3) ? rgba(128, 128, 128, 0.8) : rgba(255, 128, 128, 0.8);
+					basicMenu[2][3] = ((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD")) ? rgba(128, 128, 128, 0.8) : rgba(255, 128, 128, 0.8);
 					basicMenu[3][3] = ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) || (editSide == 3) ? rgba(128, 128, 128, 0.8) : rgba(255, 255, 0, 0.8);
 					if(editSide==3)
 					{

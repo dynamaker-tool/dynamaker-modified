@@ -351,7 +351,11 @@ playView.prototype = {
 				ctx.fillText("(C- V+) ±小节切分数", windowWidth*0.38, windowHeight - 55);
 				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.38, windowHeight - 30);
 				//Right Region
-				ctx.fillText("(F11) 全屏", windowWidth*0.52, windowHeight - 80);
+				if (navigator.userAgent.indexOf("Mac") != -1) {
+					ctx.fillText("(Ctrl Cmd F) 全屏", windowWidth*0.53, windowHeight - 80);
+				} else {
+					ctx.fillText("(F11) 全屏", windowWidth*0.53, windowHeight - 80);
+				}
 				ctx.fillText("(Shift← →) 撤销/恢复", windowWidth*0.52, windowHeight - 55);
 				ctx.fillText("(L) 简洁模式", windowWidth*0.52, windowHeight - 30);
 			}

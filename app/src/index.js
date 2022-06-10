@@ -24,43 +24,72 @@ const createWindow = () => {
   //mainWindow.webContents.openDevTools();
 };
 
+const createWindowDarwin = () => {
+  // Create the browser window.
+  const mainWindow = new BrowserWindow({
+   width: 1618,
+   height: 940,
+   fullscreen: false,
+   fullscreenable: true,
+   autoHideMenuBar: true,
+ });
+
+  // and load the index.html of the app.
+  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+
+  // Open the DevTools.
+  //mainWindow.webContents.openDevTools();
+};
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
-
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
-
-// Jmak - Overriding Menu
+if (process.platform === 'darwin') {
+   app.on('ready', createWindowDarwin);
+ } else {
+   app.on('ready', createWindow);
+ }
+ 
+ // Quit when all windows are closed, except on macOS. There, it's common
+ // for applications and their menu bar to stay active until the user quits
+ // explicitly with Cmd + Q.
+ app.on('window-all-closed', () => {
+   if (process.platform !== 'darwin') {
+     app.quit();
+   }
+ });
+ 
+ app.on('activate', () => {
+   // On OS X it's common to re-create a window in the app when the
+   // dock icon is clicked and there are no other windows open.
+   if (BrowserWindow.getAllWindows().length === 0) {
+     createWindowDarwin();
+   }
+ });
+ 
+ // Jmak - Overriding Menu
+ // i0ntempest - macOS specific improvements
 const template = [
    {
-     label: '文件',
-      submenu: [
-         {
-     label: '新窗口',
-     accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
-     click () { createWindow() }
-  },
-   { 
-     role: 'quit',
-     label: '退出',
-     accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Alt+F4'}
-      ]
+      label: '文件',
+       submenu: [
+          {
+            label: '新窗口',
+            accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
+            click () {
+                       if (process.platform === 'darwin') {
+                         createWindowDarwin()
+                       } else {
+                         createWindow()
+                       }
+                     }
+          },
+          { 
+            role: 'quit',
+            label: '退出',
+            accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Alt+F4'
+          }
+       ]
    },
    {
       label: '编辑',

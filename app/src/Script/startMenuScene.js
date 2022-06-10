@@ -199,13 +199,18 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix,NotoSans";
-			ctx.fillText("修改者： TLChicken, Jmak, Vertrak, keanucode 和 Jono997", windowWidth * 0.5, windowHeight * 0.28);
+			ctx.fillText("修改者： TLChicken, Jmak, Vertrak, keanucode, Jono997 和 i0nTempest", windowWidth * 0.5, windowHeight * 0.28);
 
 			//Jmak - Changed and deleted unnecessary code
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix,NotoSans";
-			ctx.fillText("[ F11 ] 全屏, [ Alt ] 顯示菜單欄, [ Ctrl -/Shift + ] 放大/縮小", windowWidth * 0.5, windowHeight * 0.75);
+			//i0ntempest - Shortcuts for macOS (menu bar is controlled by mouse)
+			if (navigator.userAgent.indexOf("Mac") != -1) {
+				ctx.fillText("[ Control Cmd F ] 全屏, [ Alt ] 显示菜单栏, [ Cmd -/+ ] 放大/缩小", windowWidth * 0.5, windowHeight * 0.75);
+			} else {
+				ctx.fillText("[ F11 ] 全屏, [ Alt ] 显示菜单栏, [ Ctrl -/Shift + ] 放大/缩小", windowWidth * 0.5, windowHeight * 0.75);
+			}
 
 			if (this.choice == 1 && musicFileOk) {
 				ctx.fillStyle = "#0F0";
@@ -230,7 +235,7 @@ startMenuScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix,NotoSans";
 		ctx.textAlign = "center";
-		ctx.fillText("版本 1.21.4", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("版本 1.21.4.1", windowWidth * 0.5, windowHeight - 35);
 
 		//Jmak - Copyright Information and Special Thanks
 		ctx.fillStyle = "#0FF";

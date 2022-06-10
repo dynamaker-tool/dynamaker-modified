@@ -24,49 +24,78 @@ const createWindow = () => {
   //mainWindow.webContents.openDevTools();
 };
 
+const createWindowDarwin = () => {
+  // Create the browser window.
+  const mainWindow = new BrowserWindow({
+   width: 1618,
+   height: 940,
+   fullscreen: false,
+   fullscreenable: true,
+   autoHideMenuBar: true,
+ });
+
+  // and load the index.html of the app.
+  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+
+  // Open the DevTools.
+  //mainWindow.webContents.openDevTools();
+};
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
-
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
-
-// Jmak - Overriding Menu
+if (process.platform === 'darwin') {
+   app.on('ready', createWindowDarwin);
+ } else {
+   app.on('ready', createWindow);
+ }
+ 
+ // Quit when all windows are closed, except on macOS. There, it's common
+ // for applications and their menu bar to stay active until the user quits
+ // explicitly with Cmd + Q.
+ app.on('window-all-closed', () => {
+   if (process.platform !== 'darwin') {
+     app.quit();
+   }
+ });
+ 
+ app.on('activate', () => {
+   // On OS X it's common to re-create a window in the app when the
+   // dock icon is clicked and there are no other windows open.
+   if (BrowserWindow.getAllWindows().length === 0) {
+     createWindowDarwin();
+   }
+ });
+ 
+ // Jmak - Overriding Menu
+ // i0ntempest - macOS specific improvements
 const template = [
    {
-     label: '文件',
-      submenu: [
-         {
-     label: '新視窗',
-     accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
-     click () { createWindow() }
-  },
-   { 
-     role: 'quit',
-     label: '退出',
-     accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Alt+F4'}
-      ]
+      label: '文件',
+       submenu: [
+          {
+            label: '新窗口',
+            accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
+            click () {
+                       if (process.platform === 'darwin') {
+                         createWindowDarwin()
+                       } else {
+                         createWindow()
+                       }
+                     }
+          },
+          { 
+            role: 'quit',
+            label: '退出',
+            accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Alt+F4'
+          }
+       ]
    },
    {
-      label: '編輯',
+      label: '编辑',
       submenu: [
          {
-            label: '快捷鍵幫助',
+            label: '快捷键帮助',
             accelerator: 'H'
          },
          {
@@ -74,71 +103,71 @@ const template = [
          },
          {
             role: 'undo',
-            label: '撤銷',
+            label: '撤销',
             accelerator: 'Shift+Left'
          },
          {
             role: 'redo',
-            label: '恢復',
+            label: '恢复',
             accelerator: 'Shift+Right'
          },
          {
             type: 'separator'
          },
          {
-             label: '鼠標滾輪反向',
+             label: '鼠标滚轮方向',
             accelerator: 'B'
          },
          {
-            label: '簡潔模式',
+            label: '简洁模式',
             accelerator: 'L'
          },
          {
              type: 'separator'
          },
          {
-            label: '鎖定/解鎖小節',
+            label: '锁定/解锁小节',
             accelerator: 'Z'
          },
          {
-            label: '鎖定/解鎖X軸',
+            label: '锁定/解锁X轴',
             accelerator: 'X'
          },
          {
              type: 'separator'
          },
          {
-            label: '增加小節切分數',
+            label: '增加小节切分数',
             accelerator: 'C'
          },
          {
-            label: '減少小節切分數',
+            label: '減少小节切分数',
             accelerator: 'V'
          },
          {
              type: 'separator'
          },
          {
-            label: '後退0.01秒',
+            label: '后退0.01秒',
              accelerator: 'A'
          },
          {
-            label: '前進0.01秒',
+            label: '前进0.01秒',
             accelerator: 'D'
          },
          {
              type: 'separator'
          },
          {
-            label: '顯示左側小節線',
+            label: '显示左侧小节线',
             accelerator: 'Left'
          },
          {
-            label: '顯示中間小節線',
+            label: '显示中间小节线',
             accelerator: 'Down'
          },
          {
-            label: '顯示右側小節線',
+            label: '显示右侧小节线',
             accelerator: 'Right'
          }
 
@@ -154,14 +183,14 @@ const template = [
          },
          {
             role: 'toggledevtools',
-            label: '開發者工具'
+            label: '开发者工具'
          },
          {
             type: 'separator'
          },
          {
             role: 'resetzoom',
-            label: '實際大小'
+            label: '实际大小'
          },
          {
             role: 'zoomin',
@@ -169,7 +198,7 @@ const template = [
          },
          {
             role: 'zoomout',
-            label: '縮小'
+            label: '缩小'
          },
          {
             type: 'separator'
@@ -183,7 +212,7 @@ const template = [
    
    {
       role: 'window',
-      label: '視窗',
+      label: '窗口',
       submenu: [
          {
             role: 'minimize',
@@ -191,14 +220,14 @@ const template = [
          },
          {
             role: 'close',
-            label: '關閉'
+            label: '关闭'
          }
       ]
    },
 
    {
       role: 'Help',
-      label: '幫助',
+      label: '帮助',
       submenu: [
          {
             label:'DynaMaker修改版',
@@ -214,7 +243,7 @@ const template = [
             }
          },
          {
-            label:'DyM譜面工具',
+            label:'DyM制谱工具',
             click() { 
                   shell.openExternal('https://github.com/Jono997/dym-chart-tool')
             }

@@ -199,13 +199,18 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix";
-			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode and Jono997", windowWidth * 0.5, windowHeight * 0.28);
+			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997 and i0nTempest", windowWidth * 0.5, windowHeight * 0.28);
 
 			//Jmak - Changed and deleted unnecessary code
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix";
-			ctx.fillText("[ F11 ] to toggle fullscreen, [ Alt ] to show control menu, [ Ctrl -/Shift + ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
+			//i0ntempest - Shortcuts for macOS (menu bar is controlled by mouse)
+			if (navigator.userAgent.indexOf("Mac") != -1) {
+				ctx.fillText("[ Control Cmd F ] to toggle fullscreen, [ Cmd -/+ ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
+			} else {
+				ctx.fillText("[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ Ctrl -/Shift + ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
+			}
 
 			if (this.choice == 1 && musicFileOk) {
 				ctx.fillStyle = "#0F0";

@@ -351,9 +351,13 @@ playView.prototype = {
 				ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
 				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
 				//Right Region
-				ctx.fillText("(F11) fullscreen", windowWidth*0.53, windowHeight - 80);
+				if (navigator.userAgent.indexOf("Mac") != -1) {
+					ctx.fillText("(Ctrl Cmd F) fullscreen", windowWidth*0.53, windowHeight - 80);
+				} else {
+					ctx.fillText("(F11) fullscreen", windowWidth*0.53, windowHeight - 80);
+				}
 				ctx.fillText("(Shift← →) un/redo", windowWidth*0.53, windowHeight - 55);
-				ctx.fillText("(L) compact mode", windowWidth*0.53, windowHeight - 30);
+				ctx.fillText("(L) simple mode", windowWidth*0.53, windowHeight - 30);
 			}
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);

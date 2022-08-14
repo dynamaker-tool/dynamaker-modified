@@ -7,6 +7,7 @@ Windows (64-bit), macOS (64-bit)
 
 1.21.4.1 (15/8/2022)
 - macOS improvements 進行macOS優化
+- Fixed translation errors 已修正翻譯錯誤
 
 1.21.4 (28/3/2022)
 - Added .mp4 playback support 現已支援.mp4播放

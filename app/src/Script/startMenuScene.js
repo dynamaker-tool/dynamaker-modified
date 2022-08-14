@@ -207,9 +207,9 @@ startMenuScene.prototype = {
 			ctx.font = "25px Dynamix,NotoSans";
 			//i0ntempest - Shortcuts for macOS (menu bar is controlled by mouse)
 			if (navigator.userAgent.indexOf("Mac") != -1) {
-				ctx.fillText("[ Control Cmd F ] 全屏, [ Cmd -/+ ] 放大/缩小", windowWidth * 0.5, windowHeight * 0.75);
+				ctx.fillText("[ Control Cmd F ] 全屏, [ Cmd -/+ ] 放大/縮小", windowWidth * 0.5, windowHeight * 0.75);
 			} else {
-				ctx.fillText("[ F11 ] 全屏, [ Ctrl -/Shift + ] 放大/缩小", windowWidth * 0.5, windowHeight * 0.75);
+				ctx.fillText("[ F11 ] 全屏, [ Alt ] 顯示菜單欄, [ Ctrl -/Shift + ] 放大/縮小", windowWidth * 0.5, windowHeight * 0.75);
 			}
 
 			if (this.choice == 1 && musicFileOk) {

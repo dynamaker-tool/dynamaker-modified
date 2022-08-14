@@ -74,7 +74,7 @@ const template = [
       label: '文件',
        submenu: [
           {
-            label: '新窗口',
+            label: '新視窗',
             accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
             click () {
                        if (process.platform === 'darwin') {
@@ -92,10 +92,10 @@ const template = [
        ]
    },
    {
-      label: '编辑',
+      label: '編輯',
       submenu: [
          {
-            label: '快捷键帮助',
+            label: '快捷鍵幫助',
             accelerator: 'H'
          },
          {
@@ -103,71 +103,71 @@ const template = [
          },
          {
             role: 'undo',
-            label: '撤销',
+            label: '撤銷',
             accelerator: 'Shift+Left'
          },
          {
             role: 'redo',
-            label: '恢复',
+            label: '恢復',
             accelerator: 'Shift+Right'
          },
          {
             type: 'separator'
          },
          {
-             label: '鼠标滚轮方向',
+             label: '鼠標滾輪方向',
             accelerator: 'B'
          },
          {
-            label: '简洁模式',
+            label: '簡潔模式',
             accelerator: 'L'
          },
          {
              type: 'separator'
          },
          {
-            label: '锁定/解锁小节',
+            label: '鎖定/解鎖小節',
             accelerator: 'Z'
          },
          {
-            label: '锁定/解锁X轴',
+            label: '鎖定/解鎖X軸',
             accelerator: 'X'
          },
          {
              type: 'separator'
          },
          {
-            label: '增加小节切分数',
+            label: '增加小節切分數',
             accelerator: 'C'
          },
          {
-            label: '減少小节切分数',
+            label: '減少小節切分數',
             accelerator: 'V'
          },
          {
              type: 'separator'
          },
          {
-            label: '后退0.01秒',
+            label: '後退0.01秒',
              accelerator: 'A'
          },
          {
-            label: '前进0.01秒',
+            label: '前進0.01秒',
             accelerator: 'D'
          },
          {
              type: 'separator'
          },
          {
-            label: '显示左侧小节线',
+            label: '顯示左側小節線',
             accelerator: 'Left'
          },
          {
-            label: '显示中间小节线',
+            label: '顯示中間小節線',
             accelerator: 'Down'
          },
          {
-            label: '显示右侧小节线',
+            label: '顯示右側小節線',
             accelerator: 'Right'
          }
 
@@ -183,14 +183,14 @@ const template = [
          },
          {
             role: 'toggledevtools',
-            label: '开发者工具'
+            label: '開發者工具'
          },
          {
             type: 'separator'
          },
          {
             role: 'resetzoom',
-            label: '实际大小'
+            label: '實際大小'
          },
          {
             role: 'zoomin',
@@ -198,7 +198,7 @@ const template = [
          },
          {
             role: 'zoomout',
-            label: '缩小'
+            label: '縮小'
          },
          {
             type: 'separator'
@@ -212,7 +212,7 @@ const template = [
    
    {
       role: 'window',
-      label: '窗口',
+      label: '視窗',
       submenu: [
          {
             role: 'minimize',
@@ -220,14 +220,14 @@ const template = [
          },
          {
             role: 'close',
-            label: '关闭'
+            label: '關閉'
          }
       ]
    },
 
    {
       role: 'Help',
-      label: '帮助',
+      label: '幫助',
       submenu: [
          {
             label:'DynaMaker修改版',
@@ -243,7 +243,7 @@ const template = [
             }
          },
          {
-            label:'DyM制谱工具',
+            label:'DyM譜面工具',
             click() { 
                   shell.openExternal('https://github.com/Jono997/dym-chart-tool')
             }

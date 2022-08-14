@@ -1,6 +1,6 @@
 {
   "name": "dynamaker",
-  "version": "1.21.3",
+  "version": "1.21.4.1",
   "description": "DynaMaker is a charting tool for Dynamite, created by TunerGames and omegaPi.",
   "main": "src/index.js",
   "scripts": {

@@ -207,7 +207,7 @@ startMenuScene.prototype = {
 			ctx.font = "25px Dynamix,NotoSans";
 			//i0ntempest - Shortcuts for macOS (menu bar is controlled by mouse)
 			if (navigator.userAgent.indexOf("Mac") != -1) {
-				ctx.fillText("[ Control Cmd F ] 全屏, [ Alt ] 显示菜单栏, [ Cmd -/+ ] 放大/缩小", windowWidth * 0.5, windowHeight * 0.75);
+				ctx.fillText("[ Control Cmd F ] 全屏, [ Cmd -/+ ] 放大/缩小", windowWidth * 0.5, windowHeight * 0.75);
 			} else {
 				ctx.fillText("[ F11 ] 全屏, [ Alt ] 显示菜单栏, [ Ctrl -/Shift + ] 放大/缩小", windowWidth * 0.5, windowHeight * 0.75);
 			}

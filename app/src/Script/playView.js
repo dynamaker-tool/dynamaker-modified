@@ -76,7 +76,7 @@ playView.prototype = {
 		if (isParticles60FPS) {
 			// let currFrameNo = getFrameNumberOutOf60FromSongTime(thisTime);
 			let currFrameNo = getFrameNumberOutOf60FromMs(currDate.getMilliseconds());
-			console.log(currFrameNo);
+			// console.log(currFrameNo);
 			if (currFrameNo > previousFrameWithParticles || currFrameNo < previousFrameWithParticles) {
 				previousFrameWithParticles = currFrameNo % 60 == 59 ? -1 : currFrameNo % 60;
 			} else {
@@ -142,7 +142,7 @@ playView.prototype = {
 				if (between(showStart, 10, 30)) {
 					pauseShadowH = (120 + pauseShadowH*4)/5;
 				}
-				if (showStart == -1) {
+				if (showStart == -1 && modifyParticlesInNextFrame) {
 					pauseShadowH = 120;
 					lr = tlr;
 					ud = tud;
@@ -150,7 +150,9 @@ playView.prototype = {
 					resetCS();
 					musicCtrl.goplay();
 				}
-				showStart--;
+				if (modifyParticlesInNextFrame) {
+					showStart--;
+				}
 			}
 
 			if (! timerReady) {
@@ -1152,7 +1154,9 @@ playView.prototype = {
 
 			//TLC - added Mixer restriction
 			//bar
-			barL = Math.round((barL + barTargetL)/2);
+			if (modifyParticlesInNextFrame) {
+				barL = Math.round((barL + barTargetL) / 2);
+			}
 			if (barL < 198) {
 				barL = 198;
 			}
@@ -1161,7 +1165,10 @@ playView.prototype = {
 			} else if (barL > 858 && restrictMixerHeight) {
 				barL = 858;
 			}
-			barR = Math.round((barR + barTargetR)/2);
+
+			if (modifyParticlesInNextFrame) {
+				barR = Math.round((barR + barTargetR) / 2);
+			}
 			if (barR < 198) {
 				barR = 198;
 			}

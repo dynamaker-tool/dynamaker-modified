@@ -216,6 +216,11 @@ var previousFrameWithParticles = -1;
 /** Display Error Messages. */
 var errorMsgContainer = [];
 
+/** GRAPHICS - Canvas and Context Variables **/
+var morePlaySrc = null;
+var bleedCanvas = null;
+var bleedContext = null;
+
 //TLC Options
 /** false: Arrow keys toggle 2 options of bar lines instead of 3. The solid bar line option is left out. */
 var includeSolidBarLine = true;
@@ -247,6 +252,11 @@ numberSrc = new Image();
 numberSrc.src = "Graphics/number.png";
 //charSrc = new Image();
 //charSrc.src = "Graphics/char2.png";
+
+// TLC- More Play Graphics
+morePlaySrc = new Image();
+morePlaySrc.src = "Graphics/morePlayGraphics.png";
+
 
 blankCanvasU = document.createElement("canvas"); blankContextU = blankCanvasU.getContext("2d"); blankCanvasU.width = 160; blankCanvasU.height = 100;
 blankCanvasD = document.createElement("canvas"); blankContextD = blankCanvasD.getContext("2d"); blankCanvasD.width = 160; blankCanvasD.height = 100;
@@ -288,6 +298,9 @@ perfectShineCanvas = document.createElement("canvas"); perfectShineContext = per
 mixerShadowCanvasD = document.createElement("canvas"); mixerShadowContextD = mixerShadowCanvasD.getContext("2d"); mixerShadowCanvasD.width = 381; mixerShadowCanvasD.height = 437;
 mixerShadowCanvasL = document.createElement("canvas"); mixerShadowContextL = mixerShadowCanvasL.getContext("2d"); mixerShadowCanvasL.width = 437; mixerShadowCanvasL.height = 381;
 mixerShadowCanvasR = document.createElement("canvas"); mixerShadowContextR = mixerShadowCanvasR.getContext("2d"); mixerShadowCanvasR.width = 437; mixerShadowCanvasR.height = 381;
+
+bleedCanvas = document.createElement("canvas"); bleedContext = bleedCanvas.getContext("2d"); bleedCanvas.width = 398; bleedCanvas.height = 75;
+
 //imgLoad(mixerSrc, function() {
 //});
 
@@ -385,6 +398,9 @@ imgLoad(playSrc, function() {
 	purpleParticleContext.drawImage(playSrc, 117, 814, 116, 146, 0, 0, 116, 146);
 
 	whiteParticleContext.drawImage(playSrc, 233, 814, 116, 146, 0, 0, 116, 146);
+
+	//bleedContext.drawImage(playSrc, 1041, 887, 264, 50, 0, 0, 264, 50);
+	bleedContext.drawImage(morePlaySrc, 0, 0, 398, 75, 0, 0, 398, 75);
 });
 
 //imgLoad(charSrc, function() {

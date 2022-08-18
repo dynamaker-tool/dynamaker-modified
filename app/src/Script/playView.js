@@ -204,6 +204,13 @@ playView.prototype = {
 			drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth*(1 - i*0.1) , windowHeight-ud+51, 1);
 		}
 
+		//console.log("RUNNING");
+
+		// TLC - Bleed Addition
+		if (showCS) {
+			drawMiddleImage(bleedCanvas, 0, 0, 398, 75, windowWidth / 2, windowHeight * 0.6, 1);
+		}
+		//TEST: ctx.drawImage(bleedCanvas, 0, 0, 264, 50, 0, 0, 264, 50);
 
 		//comboScore
 		if (showCS) {

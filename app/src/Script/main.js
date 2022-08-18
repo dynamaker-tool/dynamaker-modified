@@ -612,6 +612,7 @@ var main = function () {
 			ctx.fillText(errorMsgContainer[i].message.length > 150 ? errorMsgContainer[i].message.substring(0, 150) + "..." : errorMsgContainer[i].message, windowWidth / 2, (windowHeight / 8) * lineNo + windowHeight / 32);
 			ctx.fillText(errorMsgContainer[i].stack.length > 150 ? errorMsgContainer[i].stack.substring(0, 150) + "..." : errorMsgContainer[i].stack, windowWidth / 2, (windowHeight / 8) * lineNo + windowHeight / 16);
 			lineNo++;
+			console.log(errorMsgContainer[i].message);
 		}
 	}
 

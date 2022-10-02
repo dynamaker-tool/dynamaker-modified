@@ -2,7 +2,7 @@ var sX, sY, sW, sH, dX, dY, dW, dH;
 var showParticles = true;
 var showHitSound = false;
 var gradual = true;
-var gradualPx = 100;
+var gradualPx = 600;
 var markSecion = 0;
 var editSide = 0; //0Down 1Left 2Right
 var noteChosen = [];
@@ -114,6 +114,13 @@ playView.prototype = {
 					ctx.globalAlpha = 0.3;
 					ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
 					ctx.globalAlpha = 1
+				} else {
+					if (showCS) {
+						// TLC - White bkg gradient thing
+						if (!bg) {
+							drawMiddleImage(bkgWhiteGradientCanvas, 0, 0, 1920, 1080, windowWidth / 2, windowHeight / 2, 1);
+						}
+					}
 				}
 				ctx.fillStyle = "rgba(0,0,0,0.7)";
 				ctx.fillRect(0, windowHeight - ud, windowWidth, ud)
@@ -210,11 +217,14 @@ playView.prototype = {
 
 		//console.log("RUNNING");
 
-		// TLC - Bleed Addition
+		// TLC
 		if (showCS) {
+			// Bleed Addition
 			drawMiddleImage(bleedCanvas, 0, 0, 398, 75, windowWidth / 2, windowHeight * 0.6, 1);
 		}
 		//TEST: ctx.drawImage(bleedCanvas, 0, 0, 264, 50, 0, 0, 264, 50);
+
+
 
 		//comboScore
 		if (showCS) {

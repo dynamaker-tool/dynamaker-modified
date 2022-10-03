@@ -2,7 +2,7 @@ var sX, sY, sW, sH, dX, dY, dW, dH;
 var showParticles = true;
 var showHitSound = false;
 var gradual = true;
-var gradualPx = 600;
+var gradualPx = 400;
 var markSecion = 0;
 var editSide = 0; //0Down 1Left 2Right
 var noteChosen = [];

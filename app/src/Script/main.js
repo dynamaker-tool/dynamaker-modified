@@ -221,6 +221,11 @@ var morePlaySrc = null;
 var bleedCanvas = null;
 var bleedContext = null;
 
+var bkgWhiteGradientSrc = null;
+var bkgWhiteGradientCanvas = null;
+var bkgWhiteGradientContext = null;
+
+
 //TLC Options
 /** false: Arrow keys toggle 2 options of bar lines instead of 3. The solid bar line option is left out. */
 var includeSolidBarLine = true;
@@ -256,6 +261,9 @@ numberSrc.src = "Graphics/number.png";
 // TLC- More Play Graphics
 morePlaySrc = new Image();
 morePlaySrc.src = "Graphics/morePlayGraphics.png";
+
+bkgWhiteGradientSrc = new Image();
+bkgWhiteGradientSrc.src = "Graphics/BkgWhiteGradient.png";
 
 
 blankCanvasU = document.createElement("canvas"); blankContextU = blankCanvasU.getContext("2d"); blankCanvasU.width = 160; blankCanvasU.height = 100;
@@ -300,6 +308,8 @@ mixerShadowCanvasL = document.createElement("canvas"); mixerShadowContextL = mix
 mixerShadowCanvasR = document.createElement("canvas"); mixerShadowContextR = mixerShadowCanvasR.getContext("2d"); mixerShadowCanvasR.width = 437; mixerShadowCanvasR.height = 381;
 
 bleedCanvas = document.createElement("canvas"); bleedContext = bleedCanvas.getContext("2d"); bleedCanvas.width = 398; bleedCanvas.height = 75;
+
+bkgWhiteGradientCanvas = document.createElement("canvas"); bkgWhiteGradientContext = bkgWhiteGradientCanvas.getContext("2d"); bkgWhiteGradientCanvas.width = 1920; bkgWhiteGradientCanvas.height = 1080;
 
 //imgLoad(mixerSrc, function() {
 //});
@@ -399,9 +409,18 @@ imgLoad(playSrc, function() {
 
 	whiteParticleContext.drawImage(playSrc, 233, 814, 116, 146, 0, 0, 116, 146);
 
+	// TLC - Cant move this into a separate imgLoad function because it affects the loaded variable
 	//bleedContext.drawImage(playSrc, 1041, 887, 264, 50, 0, 0, 264, 50);
 	bleedContext.drawImage(morePlaySrc, 0, 0, 398, 75, 0, 0, 398, 75);
+
+	bkgWhiteGradientContext.drawImage(bkgWhiteGradientSrc, 0, 0, 1920, 1080, 0, 0, 1920, 1080);
+
+
 });
+
+
+
+
 
 //imgLoad(charSrc, function() {
 //	charContext.drawImage(charSrc, 0, 0);

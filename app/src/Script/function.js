@@ -1279,7 +1279,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 		case 0:
 			if (hitting) {
 				var t = c.globalAlpha;
-				c.globalAlpha *= 0.4;
+				c.globalAlpha *= 0.5;
 				c.fillStyle = "#0F0";
 				c.fillRect(x - width/2, windowHeight - ud - (height + length), width, length);
 				c.globalAlpha = t;
@@ -1359,7 +1359,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 
 			if (hitting) {
 				var t = c.globalAlpha;
-				c.globalAlpha *= 0.3;
+				c.globalAlpha *= 0.4;
 				c.fillStyle = "#0F0";
 				c.fillRect(lr + height, x - width/2, length, width);
 				c.globalAlpha = t;
@@ -1440,7 +1440,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 //			c.fillRect(windowWidth - lr - (height + length), x - width/2, length, width);
 			if (hitting) {
 				var t = c.globalAlpha;
-				c.globalAlpha *= 0.3;
+				c.globalAlpha *= 0.4;
 				c.fillStyle = "#0F0";
 				c.fillRect(windowWidth - lr - (height + length), x - width/2, length, width);
 				c.globalAlpha = t;

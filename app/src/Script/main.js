@@ -199,6 +199,7 @@ var ctx = null;
 
 //------------- TLC Vars ------------------------//
 
+// BOOLEANS
 /** Added for mp4 Support, true if video was loaded. */
 var isVideo = false;
 
@@ -207,6 +208,11 @@ var hOn = false;
 
 /** Restrict Mixer Height toggle. */
 var restrictMixerHeight = true;
+
+/** Toggle Bleed Bar Graphic. */
+var isBleedBarGraphicOn = false;
+
+
 
 /** Restrict Particles to 60FPS. */
 var isParticles60FPS = true;

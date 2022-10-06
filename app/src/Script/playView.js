@@ -212,14 +212,18 @@ playView.prototype = {
 			drawMiddleImage(blankCanvasU, 0, 0, 160, 100, windowWidth*(0.95 - i*0.1) , windowHeight-ud+87, 1);
 		}
 		for (var i = 1; i <= 4; ++i) {
-			drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth*(1 - i*0.1) , windowHeight-ud+51, 1);
+			if (i == 2 && showCS && isBleedBarGraphicOn) {
+				drawMiddleImage(redCanvasD, 0, 0, 160, 100, windowWidth * (1 - i * 0.1), windowHeight - ud + 51, 1);
+			} else {
+				drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth * (1 - i * 0.1), windowHeight - ud + 51, 1);
+			}
 		}
 
 		//console.log("RUNNING");
 
-		// TLC
-		if (showCS) {
-			// Bleed Addition
+
+		// TLC - Bleed Addition
+		if (showCS && isBleedBarGraphicOn) {
 			drawMiddleImage(bleedCanvas, 0, 0, 398, 75, windowWidth / 2, windowHeight * 0.6, 1);
 		}
 		//TEST: ctx.drawImage(bleedCanvas, 0, 0, 264, 50, 0, 0, 264, 50);

@@ -120,6 +120,13 @@ const template = [
             accelerator: 'L'
          },
          {
+            type: 'separator'
+         },
+         {
+            label: 'Bleed Mod',
+            accelerator: 'G'
+         },
+         {
              type: 'separator'
          },
          {

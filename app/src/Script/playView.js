@@ -160,8 +160,12 @@ playView.prototype = {
 				audioRate = 1;//Math.random()/10;
 				audioRateCache = 1;
 				musicCtrl.playbackRate = 1;
-				musicCtrl.volume = 1;
-				musicCtrl.goplay();
+				// Avoid blowing up people's speakers
+				musicCtrl.volume = 0.8;
+				// Do not start playing right after entering editor
+				//musicCtrl.goplay();
+				// Default to editing mode
+				mainMouse.movement = "choose";
 				var realTime = 0;
 				timer = new Date();
 				baseTime = timer.getTime();
@@ -1522,7 +1526,8 @@ playView.prototype = {
 					}
 
 					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
-						hitSoundGainNode.gain.value = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
+						// Hitsound volume: default to the same as music volume
+						hitSoundGainNode.gain.value = showHitSound ? Math.round((mainMouse.coordinate.x - rx)/400*100)/100 : musicCtrl.volume;
 					} else if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 606, ry + 644) && musicCtrl) {
 						musicCtrl.volume = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
 					}

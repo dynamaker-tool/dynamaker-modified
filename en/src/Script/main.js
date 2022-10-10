@@ -1,3 +1,12 @@
+window.onbeforeunload = function () {
+    if(confirm("Have you saved your chart? Click OK to close the window.")){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 var BlobBuilder = Blob;
 var browser = getBrowser();
 var windowWidth = 1920;

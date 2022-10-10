@@ -1,3 +1,11 @@
+window.onbeforeunload = function () {
+    if(confirm("你保存譜面了嗎? 點擊OK關閉窗口。")){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 var BlobBuilder = Blob;
 var browser = getBrowser();
 var windowWidth = 1920;

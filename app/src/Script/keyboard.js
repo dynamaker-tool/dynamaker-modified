@@ -230,6 +230,10 @@ keyboard.prototype = {
 		if (kble(72)) {
 			hOn = !hOn;
 		}
+
+		if (kble(71)) {
+			isBleedBarGraphicOn = !isBleedBarGraphicOn;
+		}
 		
 		if (musicCtrl && CMap) {	    	
 			if (kble(77)) { // M

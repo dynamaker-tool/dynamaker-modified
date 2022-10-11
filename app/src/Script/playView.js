@@ -2,7 +2,7 @@ var sX, sY, sW, sH, dX, dY, dW, dH;
 var showParticles = true;
 var showHitSound = false;
 var gradual = true;
-var gradualPx = 100;
+var gradualPx = 400;
 var markSecion = 0;
 var editSide = 0; //0Down 1Left 2Right
 var noteChosen = [];
@@ -114,6 +114,13 @@ playView.prototype = {
 					ctx.globalAlpha = 0.3;
 					ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
 					ctx.globalAlpha = 1
+				} else {
+					if (showCS) {
+						// TLC - White bkg gradient thing
+						if (!bg) {
+							drawMiddleImage(bkgWhiteGradientCanvas, 0, 0, 1920, 1080, windowWidth / 2, windowHeight / 2, 1);
+						}
+					}
 				}
 				ctx.fillStyle = "rgba(0,0,0,0.7)";
 				ctx.fillRect(0, windowHeight - ud, windowWidth, ud)
@@ -205,16 +212,23 @@ playView.prototype = {
 			drawMiddleImage(blankCanvasU, 0, 0, 160, 100, windowWidth*(0.95 - i*0.1) , windowHeight-ud+87, 1);
 		}
 		for (var i = 1; i <= 4; ++i) {
-			drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth*(1 - i*0.1) , windowHeight-ud+51, 1);
+			if (i == 2 && showCS && isBleedBarGraphicOn) {
+				drawMiddleImage(redCanvasD, 0, 0, 160, 100, windowWidth * (1 - i * 0.1), windowHeight - ud + 51, 1);
+			} else {
+				drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth * (1 - i * 0.1), windowHeight - ud + 51, 1);
+			}
 		}
 
 		//console.log("RUNNING");
 
+
 		// TLC - Bleed Addition
-		if (showCS) {
+		if (showCS && isBleedBarGraphicOn) {
 			drawMiddleImage(bleedCanvas, 0, 0, 398, 75, windowWidth / 2, windowHeight * 0.6, 1);
 		}
 		//TEST: ctx.drawImage(bleedCanvas, 0, 0, 264, 50, 0, 0, 264, 50);
+
+
 
 		//comboScore
 		if (showCS) {

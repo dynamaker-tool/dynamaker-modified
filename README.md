@@ -19,6 +19,7 @@ English 英語：https://dym.iorinn.moe/en/src/
 
 Chinese (Traditional)繁體中文：https://dym.iorinn.moe/zh/src/
 
+Chinese (Simplified) 简体中文：https://dym.iorinn.moe/cn/src/
 
 # Creators 創作者
 Jmak, TLChicken, Vertrak, keanucode, Jono997, AXIS5, i0nTempest

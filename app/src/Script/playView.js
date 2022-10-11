@@ -348,12 +348,21 @@ playView.prototype = {
 
 			ctx.globalAlpha = 1;
 
+			//Jmak - Bottom menu: Enlarged FPS size, decreased H size
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "26px Dynamix";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "right";
+			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
+			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 90);
+			if (musicCtrl.paused) {
+				ctx.fillStyle = "#0F0";
+			}
+
 			if (showCS) ctx.globalAlpha = 0;
 			ctx.font = "22px Dynamix";
 			ctx.fillStyle = "#FFF";
 			ctx.textAlign = "right";
-			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
-			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 80);
 			if (musicCtrl.paused) {
 				ctx.fillStyle = "#0F0";
 			}
@@ -366,26 +375,52 @@ playView.prototype = {
 			}
 			ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.82, windowHeight - 55);
 
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "18px Dynamix";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "right";
 			if (hOn) {
 				ctx.textAlign = "left";
 				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
 				//Left Region
-				ctx.fillText("(B) scroll direction", windowWidth*0.22, windowHeight - 80);
-				ctx.fillText("(Z) hold to un/lock bar", windowWidth*0.22, windowHeight - 55);
-				ctx.fillText("(X) hold to un/lock X-axis", windowWidth*0.22, windowHeight - 30);
+				ctx.fillText("(L) simple mode", windowWidth*0.26, windowHeight - 106);
+				ctx.fillText("(B) scroll direction", windowWidth*0.26, windowHeight - 80);
+				ctx.fillText("(Z) hold to un/lock bar", windowWidth*0.26, windowHeight - 55);
+				ctx.fillText("(X) hold to un/lock X-axis", windowWidth*0.26, windowHeight - 30);
 				//Middle Region
-				ctx.fillText("(←↓→)  barlines", windowWidth*0.41, windowHeight - 80);
-				ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
-				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
+				ctx.fillText("(←↓→)  barlines", windowWidth*0.45, windowHeight - 80);
+				ctx.fillText("(C- V+) ±division", windowWidth*0.45, windowHeight - 55);
+				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.45, windowHeight - 30);
 				//Right Region
 				if (navigator.userAgent.indexOf("Mac") != -1) {
-					ctx.fillText("(Ctrl Cmd F) fullscreen", windowWidth*0.53, windowHeight - 80);
+					ctx.fillText("(Ctrl Cmd F) fullscreen", windowWidth*0.57, windowHeight - 80);
 				} else {
-					ctx.fillText("(F11) fullscreen", windowWidth*0.53, windowHeight - 80);
+					ctx.fillText("(F11) fullscreen", windowWidth*0.57, windowHeight - 80);
 				}
-				ctx.fillText("(Shift← →) un/redo", windowWidth*0.53, windowHeight - 55);
-				ctx.fillText("(L) simple mode", windowWidth*0.53, windowHeight - 30);
+				ctx.fillText("(Shift← →) un/redo", windowWidth*0.57, windowHeight - 55);
+				ctx.fillText("(G) Bleed Mod", windowWidth*0.57, windowHeight - 30);
 			}
+			//Jmak - Legacy menu
+			// if (hOn) {
+			// 	ctx.textAlign = "left";
+			// 	ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
+			// 	//Left Region
+			// 	ctx.fillText("(B) scroll direction", windowWidth*0.22, windowHeight - 80);
+			// 	ctx.fillText("(Z) hold to un/lock bar", windowWidth*0.22, windowHeight - 55);
+			// 	ctx.fillText("(X) hold to un/lock X-axis", windowWidth*0.22, windowHeight - 30);
+			// 	//Middle Region
+			// 	ctx.fillText("(←↓→)  barlines", windowWidth*0.41, windowHeight - 80);
+			// 	ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
+			// 	ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
+			// 	//Right Region
+			// 	if (navigator.userAgent.indexOf("Mac") != -1) {
+			// 		ctx.fillText("(Ctrl Cmd F) fullscreen", windowWidth*0.53, windowHeight - 80);
+			// 	} else {
+			// 		ctx.fillText("(F11) fullscreen", windowWidth*0.53, windowHeight - 80);
+			// 	}
+			// 	ctx.fillText("(Shift← →) un/redo", windowWidth*0.53, windowHeight - 55);
+			// 	ctx.fillText("(L) simple mode", windowWidth*0.53, windowHeight - 30);
+			// }
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);
 //		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth, windowHeight - 100);

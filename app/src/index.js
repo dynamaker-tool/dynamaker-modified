@@ -76,17 +76,6 @@ app.on('activate', () => {
   }
 });
 
-// Disable reload shortcuts
-app.on('browser-window-focus', function () {
-    globalShortcut.register("F5", () => {
-        console.log("F5 is pressed: Shortcut Disabled");
-    });
-});
-
-app.on('browser-window-blur', function () {
-    globalShortcut.unregister('F5');
-});
-
 // Jmak - Overriding Menu
 // i0ntempest - macOS specific improvements
 const template = [

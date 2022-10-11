@@ -12,7 +12,13 @@ Windows (64-bit), macOS (64-bit), Linux (Run Source Code with console or termina
 
 Windows(64位元), macOS(64位元), Linux(使用控制檯或終端運行源代碼)
 
-Use on Web Browser (thanks to NagaseIori): https://dym.iorinn.moe/app/src/
+# Use on Browser 在瀏覽器使用
+Web version - courtesy of NagaseIori
+
+English 英語：https://dym.iorinn.moe/en/src/
+
+Chinese (Traditional)繁體中文：https://dym.iorinn.moe/zh/src/
+
 
 # Creators 創作者
 Jmak, TLChicken, Vertrak, keanucode, Jono997, AXIS5, i0nTempest

@@ -250,7 +250,7 @@ settingsForNewMapScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix,NotoSans";
 		ctx.textAlign = "center";
-		ctx.fillText("版本 1.21.4.1", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("版本 1.21.5", windowWidth * 0.5, windowHeight - 35);
 
 		this.breath = Math.abs(frameCount - 54) / 54;
 		ctx.fillStyle = rgba(0, 255, 255, this.breath * 0.1 + 0.2);

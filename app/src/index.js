@@ -1,7 +1,8 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, dialog, globalShortcut } = require('electron');
 const shell = require('electron').shell;
 const path = require('path');
 const fs = require('fs')
+app.showExitPrompt = true
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -10,63 +11,72 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-   width: 1618,
-   height: 940,
-   fullscreen: false,
-   autoHideMenuBar: true,
- });
+  // Ternary assignment based on OS
+  const mainWindow = process.platform === 'darwin' ?
+  new BrowserWindow({
+    width: 1618,
+    height: 940,
+    fullscreen: false,
+    fullscreenable: true,
+    autoHideMenuBar: true,
+  }) :
+  new BrowserWindow({
+    width: 1618,
+    height: 940,
+    fullscreen: false,
+    autoHideMenuBar: true,
+  });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
-};
 
-const createWindowDarwin = () => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-   width: 1618,
-   height: 940,
-   fullscreen: false,
-   fullscreenable: true,
-   autoHideMenuBar: true,
- });
-
-  // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
-  // Open the DevTools.
-  //mainWindow.webContents.openDevTools();
+  // Closing dialog
+  mainWindow.on('close', (e) => {
+    if (app.showExitPrompt) {
+      e.preventDefault() // Prevents the window from closing 
+      dialog.showMessageBox({
+        type: 'question',
+        buttons: ['是', '否'],
+        title: 'Confirm',
+        message: '未保存的谱面将丢失。您确定要关闭制谱器吗？'
+      }).then(result => {
+        if (result.response === 0) { // Runs the following if 'Yes' is clicked
+          app.showExitPrompt = false
+          mainWindow.close()
+          app.showExitPrompt = true
+        }
+      })
+    }
+  })
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-if (process.platform === 'darwin') {
-   app.on('ready', createWindowDarwin);
- } else {
-   app.on('ready', createWindow);
- }
- 
- // Quit when all windows are closed, except on macOS. There, it's common
- // for applications and their menu bar to stay active until the user quits
- // explicitly with Cmd + Q.
- app.on('window-all-closed', () => {
-   if (process.platform !== 'darwin') {
-     app.quit();
-   }
- });
- 
- app.on('activate', () => {
-   // On OS X it's common to re-create a window in the app when the
-   // dock icon is clicked and there are no other windows open.
-   if (BrowserWindow.getAllWindows().length === 0) {
-     createWindowDarwin();
-   }
- });
- 
+app.on('ready', createWindow);
+
+
+// Quit when all windows are closed, except on macOS. There, it's common
+// for applications and their menu bar to stay active until the user quits
+// explicitly with Cmd + Q.
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate', () => {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+});
+
+
  // Jmak - Overriding Menu
  // i0ntempest - macOS specific improvements
 const template = [
@@ -76,13 +86,18 @@ const template = [
           {
             label: '新窗口',
             accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
+            click () { createWindow() }
+          },
+          {
+            label: '关闭前警告',
+            type: "checkbox",
+            checked: app.showExitPrompt,
             click () {
-                       if (process.platform === 'darwin') {
-                         createWindowDarwin()
-                       } else {
-                         createWindow()
-                       }
-                     }
+              app.showExitPrompt = ! app.showExitPrompt
+            }
+          },
+          {
+             type: 'separator'
           },
           { 
             role: 'quit',
@@ -121,6 +136,13 @@ const template = [
          {
             label: '简洁模式',
             accelerator: 'L'
+         },
+         {
+            type: 'separator'
+         },
+         {
+            label: 'Bleed',
+            accelerator: 'G'
          },
          {
              type: 'separator'

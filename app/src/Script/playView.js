@@ -2,7 +2,7 @@ var sX, sY, sW, sH, dX, dY, dW, dH;
 var showParticles = true;
 var showHitSound = false;
 var gradual = true;
-var gradualPx = 100;
+var gradualPx = 400;
 var markSecion = 0;
 var editSide = 0; //0Down 1Left 2Right
 var noteChosen = [];
@@ -76,7 +76,7 @@ playView.prototype = {
 		if (isParticles60FPS) {
 			// let currFrameNo = getFrameNumberOutOf60FromSongTime(thisTime);
 			let currFrameNo = getFrameNumberOutOf60FromMs(currDate.getMilliseconds());
-			console.log(currFrameNo);
+			//console.log(currFrameNo);
 			if (currFrameNo > previousFrameWithParticles || currFrameNo < previousFrameWithParticles) {
 				previousFrameWithParticles = currFrameNo % 60 == 59 ? -1 : currFrameNo % 60;
 			} else {
@@ -114,6 +114,13 @@ playView.prototype = {
 					ctx.globalAlpha = 0.3;
 					ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
 					ctx.globalAlpha = 1
+				} else {
+					if (showCS) {
+						// TLC - White bkg gradient thing
+						if (!bg) {
+							drawMiddleImage(bkgWhiteGradientCanvas, 0, 0, 1920, 1080, windowWidth / 2, windowHeight / 2, 1);
+						}
+					}
 				}
 				ctx.fillStyle = "rgba(0,0,0,0.7)";
 				ctx.fillRect(0, windowHeight - ud, windowWidth, ud)
@@ -142,7 +149,7 @@ playView.prototype = {
 				if (between(showStart, 10, 30)) {
 					pauseShadowH = (120 + pauseShadowH*4)/5;
 				}
-				if (showStart == -1) {
+				if (showStart == -1 && modifyParticlesInNextFrame) {
 					pauseShadowH = 120;
 					lr = tlr;
 					ud = tud;
@@ -150,7 +157,9 @@ playView.prototype = {
 					resetCS();
 					musicCtrl.goplay();
 				}
-				showStart--;
+				if (modifyParticlesInNextFrame) {
+					showStart--;
+				}
 			}
 
 			if (! timerReady) {
@@ -158,8 +167,12 @@ playView.prototype = {
 				audioRate = 1;//Math.random()/10;
 				audioRateCache = 1;
 				musicCtrl.playbackRate = 1;
-				musicCtrl.volume = 1;
-				musicCtrl.goplay();
+				// Avoid blowing up people's speakers
+				musicCtrl.volume = 0.8;
+				// Do not start playing right after entering editor
+				//musicCtrl.goplay();
+				// Default to editing mode
+				mainMouse.movement = "choose";
 				var realTime = 0;
 				timer = new Date();
 				baseTime = timer.getTime();
@@ -199,8 +212,22 @@ playView.prototype = {
 			drawMiddleImage(blankCanvasU, 0, 0, 160, 100, windowWidth*(0.95 - i*0.1) , windowHeight-ud+87, 1);
 		}
 		for (var i = 1; i <= 4; ++i) {
-			drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth*(1 - i*0.1) , windowHeight-ud+51, 1);
+			if (i == 2 && showCS && isBleedBarGraphicOn) {
+				drawMiddleImage(redCanvasD, 0, 0, 160, 100, windowWidth * (1 - i * 0.1), windowHeight - ud + 51, 1);
+			} else {
+				drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth * (1 - i * 0.1), windowHeight - ud + 51, 1);
+			}
 		}
+
+		//console.log("RUNNING");
+
+
+		// TLC - Bleed Addition
+		if (showCS && isBleedBarGraphicOn) {
+			drawMiddleImage(bleedCanvas, 0, 0, 398, 75, windowWidth / 2, windowHeight * 0.6, 1);
+		}
+		//TEST: ctx.drawImage(bleedCanvas, 0, 0, 264, 50, 0, 0, 264, 50);
+
 
 
 		//comboScore
@@ -321,12 +348,21 @@ playView.prototype = {
 
 			ctx.globalAlpha = 1;
 
+			//Jmak - Bottom menu: Enlarged FPS size, decreased H size
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "26px Dynamix,NotoSans";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "right";
+			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
+			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 90);
+			if (musicCtrl.paused) {
+				ctx.fillStyle = "#0F0";
+			}
+
 			if (showCS) ctx.globalAlpha = 0;
 			ctx.font = "22px Dynamix,NotoSans";
 			ctx.fillStyle = "#FFF";
 			ctx.textAlign = "right";
-			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
-			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 80);
 			if (musicCtrl.paused) {
 				ctx.fillStyle = "#0F0";
 			}
@@ -338,11 +374,16 @@ playView.prototype = {
 				ctx.fillStyle = "#F88";
 			}
 			ctx.fillText(audioRate.toFixed(1) + " x 播放速度 (S- W+)", windowWidth*0.80, windowHeight - 55);
-
+			
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "18px Dynamix,NotoSans";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "right";
 			if (hOn) {
 				ctx.textAlign = "left";
 				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
 				//Left Region
+				ctx.fillText("(L) 简洁模式", windowWidth*0.24, windowHeight - 106);
 				ctx.fillText("(B) 鼠标滚轮方向", windowWidth*0.24, windowHeight - 80);
 				ctx.fillText("(Z) 长按锁定/解锁小节", windowWidth*0.24, windowHeight - 55);
 				ctx.fillText("(X) 长按锁定/解锁X轴", windowWidth*0.24, windowHeight - 30);
@@ -352,13 +393,39 @@ playView.prototype = {
 				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.38, windowHeight - 30);
 				//Right Region
 				if (navigator.userAgent.indexOf("Mac") != -1) {
-					ctx.fillText("(Ctrl Cmd F) 全屏", windowWidth*0.53, windowHeight - 80);
+					ctx.fillText("(Ctrl Cmd F) 全屏", windowWidth*0.52, windowHeight - 80);
 				} else {
-					ctx.fillText("(F11) 全屏", windowWidth*0.53, windowHeight - 80);
+					ctx.fillText("(F11) 全屏", windowWidth*0.52, windowHeight - 80);
 				}
 				ctx.fillText("(Shift← →) 撤销/恢复", windowWidth*0.52, windowHeight - 55);
-				ctx.fillText("(L) 简洁模式", windowWidth*0.52, windowHeight - 30);
+				ctx.fillText("(G) Bleed", windowWidth*0.52, windowHeight - 30);
 			}
+			//Jmak - Prevent the font of the note types numbers being affected by the help menu
+			ctx.font = "22px Dynamix,NotoSans";
+			//End of prevention
+
+			//Jmak - Legacy menu
+			//ctx.font = "22px Dynamix,NotoSans";
+			// if (hOn) {
+			// 	ctx.textAlign = "left";
+			// 	ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
+			// 	//Left Region
+			// 	ctx.fillText("(B) 鼠标滚轮方向", windowWidth*0.24, windowHeight - 80);
+			// 	ctx.fillText("(Z) 长按锁定/解锁小节", windowWidth*0.24, windowHeight - 55);
+			// 	ctx.fillText("(X) 长按锁定/解锁X轴", windowWidth*0.24, windowHeight - 30);
+			// 	//Middle Region
+			// 	ctx.fillText("(←↓→)  小节线", windowWidth*0.38, windowHeight - 80);
+			// 	ctx.fillText("(C- V+) ±小节切分数", windowWidth*0.38, windowHeight - 55);
+			// 	ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.38, windowHeight - 30);
+			// 	//Right Region
+			// 	if (navigator.userAgent.indexOf("Mac") != -1) {
+			// 		ctx.fillText("(Ctrl Cmd F) 全屏", windowWidth*0.53, windowHeight - 80);
+			// 	} else {
+			// 		ctx.fillText("(F11) 全屏", windowWidth*0.53, windowHeight - 80);
+			// 	}
+			// 	ctx.fillText("(Shift← →) 撤销/恢复", windowWidth*0.52, windowHeight - 55);
+			// 	ctx.fillText("(L) 简洁模式", windowWidth*0.52, windowHeight - 30);
+			// }
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);
 //		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth, windowHeight - 100);
@@ -1152,7 +1219,9 @@ playView.prototype = {
 
 			//TLC - added Mixer restriction
 			//bar
-			barL = Math.round((barL + barTargetL)/2);
+			if (modifyParticlesInNextFrame) {
+				barL = Math.round((barL + barTargetL) / 2);
+			}
 			if (barL < 198) {
 				barL = 198;
 			}
@@ -1161,7 +1230,10 @@ playView.prototype = {
 			} else if (barL > 858 && restrictMixerHeight) {
 				barL = 858;
 			}
-			barR = Math.round((barR + barTargetR)/2);
+
+			if (modifyParticlesInNextFrame) {
+				barR = Math.round((barR + barTargetR) / 2);
+			}
 			if (barR < 198) {
 				barR = 198;
 			}
@@ -1508,7 +1580,8 @@ playView.prototype = {
 					}
 
 					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
-						hitSoundGainNode.gain.value = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
+						// Hitsound volume: default to the same as music volume
+						hitSoundGainNode.gain.value = showHitSound ? Math.round((mainMouse.coordinate.x - rx)/400*100)/100 : musicCtrl.volume;
 					} else if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 606, ry + 644) && musicCtrl) {
 						musicCtrl.volume = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
 					}

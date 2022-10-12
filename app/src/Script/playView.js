@@ -350,6 +350,9 @@ playView.prototype = {
 
 			//Jmak - Bottom menu: Enlarged FPS size, decreased H size
 			if (showCS) ctx.globalAlpha = 0;
+			//Jmak - Prevent the font of the note types numbers being affected by the help menu
+			ctx.font = "22px Dynamix";
+			//End of prevention
 			ctx.font = "26px Dynamix";
 			ctx.fillStyle = "#FFF";
 			ctx.textAlign = "right";
@@ -401,6 +404,7 @@ playView.prototype = {
 				ctx.fillText("(G) Bleed Mod", windowWidth*0.57, windowHeight - 30);
 			}
 			//Jmak - Legacy menu
+			//ctx.font = "22px Dynamix";
 			// if (hOn) {
 			// 	ctx.textAlign = "left";
 			// 	ctx.fillStyle = "rgba(128, 128, 128, 0.8)";

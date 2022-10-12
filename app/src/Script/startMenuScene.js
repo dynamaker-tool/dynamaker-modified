@@ -199,7 +199,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix";
-			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997 and i0nTempest", windowWidth * 0.5, windowHeight * 0.28);
+			ctx.fillText("Modified by TLChicken, i0nTempest, Jmak, Vertrak, keanucode and Jono997", windowWidth * 0.5, windowHeight * 0.28);
 
 			//Jmak - Changed and deleted unnecessary code
 			ctx.textAlign = "center";
@@ -235,7 +235,7 @@ startMenuScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
-		ctx.fillText("Version 1.21.4.5", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("Version 1.21.5", windowWidth * 0.5, windowHeight - 35);
 
 		//Jmak - Copyright Information and Special Thanks
 		ctx.fillStyle = "#0FF";

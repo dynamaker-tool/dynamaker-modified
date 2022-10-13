@@ -84,7 +84,7 @@ const template = [
       submenu: [
          {
            label: 'New Window',
-           accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
+           accelerator: 'CmdOrCtrl+N',
            click () { createWindow() }
          },
          {

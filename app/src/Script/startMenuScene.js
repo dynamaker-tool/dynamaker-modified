@@ -229,7 +229,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix";
-			ctx.fillText("48000Hz .wav is recommended to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.80)
+			ctx.fillText("48000Hz song file is recommended to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.80)
 		}
 
 		ctx.fillStyle = "#0FF";

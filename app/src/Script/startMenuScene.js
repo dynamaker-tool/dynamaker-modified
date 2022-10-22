@@ -229,7 +229,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix,NotoSans";
-			ctx.fillText("推荐使用采样频率 48000Hz 的 .wav 音频文件以减少延迟和帧频相关问题", windowWidth * 0.5, windowHeight * 0.80)
+			ctx.fillText("推荐使用采样频率 48000Hz 的音频文件以减少延迟和帧频相关问题", windowWidth * 0.5, windowHeight * 0.80)
 		}
 
 		ctx.fillStyle = "#0FF";

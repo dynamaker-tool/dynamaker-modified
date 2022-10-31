@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, dialog, globalShortcut } = require('electron')
 const shell = require('electron').shell;
 const path = require('path');
 const fs = require('fs')
+const openAboutWindow = require('about-window').default;
 app.showExitPrompt = true
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -83,6 +84,26 @@ const template = [
    {
        label: '文件',
        submenu: [
+         {
+            label: '關於',
+            //Ref: https://github.com/rhysd/electron-about-window
+            click: () =>
+                openAboutWindow({
+                    icon_path: (path.join(__dirname, 'DynaMaker.ico')),
+                    product_name: 'DynaMaker',
+                    app: 'DynaMaker',
+                    description: 'Dynamite 與 Dynamix 的製譜工具。',
+                    copyright: '版權所有屬於 ©C4Cat Entertainment Limited 以及 ©TunerGames.',
+                    use_version_info: [
+                        ['版本', '1.21.5']
+                    ],
+                    win_options: {
+                     modal: true,
+                     resizable: false
+                 },
+                 show_close_button: '關閉'
+                }),
+          },
           {
             label: '新視窗',
             accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',

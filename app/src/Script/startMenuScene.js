@@ -242,7 +242,7 @@ startMenuScene.prototype = {
 		ctx.font = "15px Dynamix";
 		ctx.textAlign = "right";
 		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.96, windowHeight * 0.05);
-		ctx.fillText("Special thanks to AXIS5, Syncable and whitelava3203", windowWidth * 0.28, windowHeight * 0.05);
+		ctx.fillText("Special thanks to AXIS5, Syncable, Aenokoff and whitelava3203", windowWidth * 0.28, windowHeight * 0.05);
 
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";

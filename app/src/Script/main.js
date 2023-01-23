@@ -271,7 +271,6 @@ morePlaySrc.src = "Graphics/morePlayGraphics.png";
 bkgWhiteGradientSrc = new Image();
 bkgWhiteGradientSrc.src = "Graphics/BkgWhiteGradient.png";
 
-
 blankCanvasU = document.createElement("canvas"); blankContextU = blankCanvasU.getContext("2d"); blankCanvasU.width = 160; blankCanvasU.height = 100;
 blankCanvasD = document.createElement("canvas"); blankContextD = blankCanvasD.getContext("2d"); blankCanvasD.width = 160; blankCanvasD.height = 100;
 redCanvasU = document.createElement("canvas"); redContextU = redCanvasU.getContext("2d"); redCanvasU.width = 160; redCanvasU.height = 100;

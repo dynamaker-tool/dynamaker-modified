@@ -76,7 +76,7 @@ playView.prototype = {
 		if (isParticles60FPS) {
 			// let currFrameNo = getFrameNumberOutOf60FromSongTime(thisTime);
 			let currFrameNo = getFrameNumberOutOf60FromMs(currDate.getMilliseconds());
-			// console.log(currFrameNo);
+			//console.log(currFrameNo);
 			if (currFrameNo > previousFrameWithParticles || currFrameNo < previousFrameWithParticles) {
 				previousFrameWithParticles = currFrameNo % 60 == 59 ? -1 : currFrameNo % 60;
 			} else {
@@ -229,6 +229,16 @@ playView.prototype = {
 		//TEST: ctx.drawImage(bleedCanvas, 0, 0, 264, 50, 0, 0, 264, 50);
 
 
+		//console.log("RUNNING");
+
+
+		// TLC - Bleed Addition
+		if (showCS && isBleedBarGraphicOn) {
+			drawMiddleImage(bleedCanvas, 0, 0, 398, 75, windowWidth / 2, windowHeight * 0.6, 1);
+		}
+		//TEST: ctx.drawImage(bleedCanvas, 0, 0, 264, 50, 0, 0, 264, 50);
+
+
 
 		//comboScore
 		if (showCS) {
@@ -348,12 +358,21 @@ playView.prototype = {
 
 			ctx.globalAlpha = 1;
 
+			//Jmak - Bottom menu: Enlarged FPS size, decreased H size
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "26px Dynamix,NotoSans";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "right";
+			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
+			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 90);
+			if (musicCtrl.paused) {
+				ctx.fillStyle = "#0F0";
+			}
+
 			if (showCS) ctx.globalAlpha = 0;
 			ctx.font = "22px Dynamix,NotoSans";
 			ctx.fillStyle = "#FFF";
 			ctx.textAlign = "right";
-			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
-			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 80);
 			if (musicCtrl.paused) {
 				ctx.fillStyle = "#0F0";
 			}
@@ -366,10 +385,15 @@ playView.prototype = {
 			}
 			ctx.fillText(audioRate.toFixed(1) + " x 播放速度 (S- W+)", windowWidth*0.80, windowHeight - 55);
 
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "18px Dynamix,NotoSans";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "right";
 			if (hOn) {
 				ctx.textAlign = "left";
 				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
 				//Left Region
+				ctx.fillText("(L) 簡潔模式", windowWidth*0.24, windowHeight - 106);
 				ctx.fillText("(B) 鼠標滾輪方向", windowWidth*0.24, windowHeight - 80);
 				ctx.fillText("(Z) 長按鎖定/解鎖小節", windowWidth*0.24, windowHeight - 55);
 				ctx.fillText("(X) 長按鎖定/解鎖X軸", windowWidth*0.24, windowHeight - 30);
@@ -379,13 +403,40 @@ playView.prototype = {
 				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.38, windowHeight - 30);
 				//Right Region
 				if (navigator.userAgent.indexOf("Mac") != -1) {
-					ctx.fillText("(Ctrl Cmd F) 全屏", windowWidth*0.53, windowHeight - 80);
+					ctx.fillText("(Ctrl Cmd F) 全屏", windowWidth*0.52, windowHeight - 80);
 				} else {
-					ctx.fillText("(F11) 全屏", windowWidth*0.53, windowHeight - 80);
+					ctx.fillText("(F11) 全屏", windowWidth*0.52, windowHeight - 80);
 				}
 				ctx.fillText("(Shift← →) 撤銷/恢復", windowWidth*0.52, windowHeight - 55);
-				ctx.fillText("(L) 簡潔模式", windowWidth*0.52, windowHeight - 30);
+				ctx.fillText("(G) Bleed", windowWidth*0.52, windowHeight - 30);
 			}
+			//Jmak - Prevent the font of the note types numbers being affected by the help menu
+			ctx.font = "22px Dynamix,NotoSans";
+			//End of prevention
+
+			//Jmak - Legacy menu
+			//ctx.font = "22px Dynamix,NotoSans";
+			
+			// if (hOn) {
+			// 	ctx.textAlign = "left";
+			// 	ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
+			// 	//Left Region
+			// 	ctx.fillText("(B) 鼠標滾輪方向", windowWidth*0.24, windowHeight - 80);
+			// 	ctx.fillText("(Z) 長按鎖定/解鎖小節", windowWidth*0.24, windowHeight - 55);
+			// 	ctx.fillText("(X) 長按鎖定/解鎖X軸", windowWidth*0.24, windowHeight - 30);
+			// 	//Middle Region
+			// 	ctx.fillText("(←↓→)  小節線", windowWidth*0.38, windowHeight - 80);
+			// 	ctx.fillText("(C- V+) ±小節切分數", windowWidth*0.38, windowHeight - 55);
+			// 	ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.38, windowHeight - 30);
+			// 	//Right Region
+			// 	if (navigator.userAgent.indexOf("Mac") != -1) {
+			// 		ctx.fillText("(Ctrl Cmd F) 全屏", windowWidth*0.53, windowHeight - 80);
+			// 	} else {
+			// 		ctx.fillText("(F11) 全屏", windowWidth*0.53, windowHeight - 80);
+			// 	}
+			// 	ctx.fillText("(Shift← →) 撤銷/恢復", windowWidth*0.52, windowHeight - 55);
+			// 	ctx.fillText("(L) 簡潔模式", windowWidth*0.52, windowHeight - 30);
+			// }
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);
 //		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth, windowHeight - 100);

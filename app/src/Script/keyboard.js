@@ -227,12 +227,16 @@ keyboard.prototype = {
 		}
 
 		//TLC
-		if (kble(72)) {
+		if (kble(72)) { // H
 			hOn = !hOn;
 		}
 
-		if (kble(71)) {
+		if (kble(71)) { // G
 			isBleedBarGraphicOn = !isBleedBarGraphicOn;
+		}
+
+		if (kble(78)) { // N
+			noteTypeCounterShown = !noteTypeCounterShown;
 		}
 		
 		if (musicCtrl && CMap) {	    	

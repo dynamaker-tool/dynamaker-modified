@@ -24,8 +24,10 @@ Jmak, TLChicken, Vertrak, keanucode, Jono997, AXIS5, i0nTempest
 
 <h1 align="center">Screenshots 截圖</h1>
 ![](https://cdn.discordapp.com/attachments/984498218400374875/1056953391420551309/image.png)
-<br>![](https://cdn.discordapp.com/attachments/984498218400374875/1056954142146433055/image.png)
-<br>![](https://cdn.discordapp.com/attachments/984498218400374875/1056955169973211156/image.png)
+
+![](https://cdn.discordapp.com/attachments/984498218400374875/1056954142146433055/image.png)
+
+![](https://cdn.discordapp.com/attachments/984498218400374875/1056955169973211156/image.png)
 
 <h1 align="center">Special Thanks 特別鳴謝</h1>
 Syncable, 錫爾/Sylvex, Aploplex, 天堂EGHD, AXIS5, Aenokoff

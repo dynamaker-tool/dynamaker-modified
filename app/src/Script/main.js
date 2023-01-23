@@ -231,6 +231,9 @@ var bkgWhiteGradientSrc = null;
 var bkgWhiteGradientCanvas = null;
 var bkgWhiteGradientContext = null;
 
+/** Note Type Counter */
+var noteTypeCounterShown = false;
+
 
 //TLC Options
 /** false: Arrow keys toggle 2 options of bar lines instead of 3. The solid bar line option is left out. */

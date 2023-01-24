@@ -398,6 +398,7 @@ playView.prototype = {
 				ctx.fillText("(Z) 長按鎖定/解鎖小節", windowWidth*0.24, windowHeight - 55);
 				ctx.fillText("(X) 長按鎖定/解鎖X軸", windowWidth*0.24, windowHeight - 30);
 				//Middle Region
+				ctx.fillText("(N) 音符計算器", windowWidth*0.38, windowHeight - 106);
 				ctx.fillText("(←↓→)  小節線", windowWidth*0.38, windowHeight - 80);
 				ctx.fillText("(C- V+) ±小節切分數", windowWidth*0.38, windowHeight - 55);
 				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.38, windowHeight - 30);

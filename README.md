@@ -19,6 +19,7 @@ https://share.weiyun.com/rYpdklN2
 
 <h1 align="center">Creators 創作者</h1>
 Jmak, TLChicken, Vertrak, keanucode, Jono997, AXIS5, i0nTempest
+<br>Icon by Aenokoff
 <br>BPM change function created by whitelava3203
 <br>Program originally created by omegaPi
 

@@ -29,11 +29,11 @@ BPM change function created by whitelava3203
 Program originally created by omegaPi
 
 # Screenshots 截圖
-![](https://cdn.discordapp.com/attachments/984498218400374875/1009147553683615947/unknown.png)
+![](Others/1.png)
 
-![](https://cdn.discordapp.com/attachments/984498218400374875/984501655716393040/Screenshot_09-06-2022_175714.png)
+![](Others/2.png)
 
-![](https://cdn.discordapp.com/attachments/984498218400374875/984501655972220948/Screenshot_09-06-2022_175740.png)
+![](Others/3.png)
 
 # Special Thanks 特別鳴謝
 Syncable, 錫爾/Sylvex, Aploplex, 天堂EGHD, AXIS5

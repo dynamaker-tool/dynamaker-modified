@@ -166,6 +166,10 @@ const template = [
             accelerator: 'G'
          },
          {
+            label: '音符计算器',
+            accelerator: 'N'
+         },
+         {
              type: 'separator'
          },
          {

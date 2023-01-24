@@ -388,6 +388,7 @@ playView.prototype = {
 				ctx.fillText("(Z) hold to un/lock bar", windowWidth*0.26, windowHeight - 55);
 				ctx.fillText("(X) hold to un/lock X-axis", windowWidth*0.26, windowHeight - 30);
 				//Middle Region
+				ctx.fillText("(N) note counter", windowWidth*0.45, windowHeight - 106);
 				ctx.fillText("(←↓→)  barlines", windowWidth*0.45, windowHeight - 80);
 				ctx.fillText("(C- V+) ±division", windowWidth*0.45, windowHeight - 55);
 				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.45, windowHeight - 30);

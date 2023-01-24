@@ -162,6 +162,10 @@ const template = [
             accelerator: 'G'
          },
          {
+            label: 'Note Counter',
+            accelerator: 'N'
+         },
+         {
              type: 'separator'
          },
          {

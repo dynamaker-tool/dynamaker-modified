@@ -1,8 +1,7 @@
 const { app, BrowserWindow, Menu, dialog, globalShortcut } = require('electron');
 const shell = require('electron').shell;
 const path = require('path');
-const fs = require('fs');
-const openAboutWindow = require('about-window').default;
+const fs = require('fs')
 app.showExitPrompt = true
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -84,28 +83,8 @@ const template = [
      label: 'File',
       submenu: [
          {
-            label: 'About',
-            //Ref: https://github.com/rhysd/electron-about-window
-            click: () =>
-                openAboutWindow({
-                    icon_path: (path.join(__dirname, 'DynaMaker.ico')),
-                    product_name: 'DynaMaker',
-                    app: 'DynaMaker',
-                    description: 'A charting tool for Dynamite and Dynamix.',
-                    copyright: '©C4Cat Entertainment Limited & TunerGames.',
-                    use_version_info: [
-                        ['Version', '1.21.5']
-                    ],
-                    win_options: {
-                     modal: true,
-                     resizable: false
-                 },
-                 show_close_button: 'Close'
-                }),
-         },
-         {
            label: 'New Window',
-           accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
+           accelerator: 'CmdOrCtrl+N',
            click () { createWindow() }
          },
          {

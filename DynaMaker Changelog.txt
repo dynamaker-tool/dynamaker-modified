@@ -1,9 +1,26 @@
 DynaMaker Update Changelog 更新日誌
 Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997, i0nTempest 由上述修改
-Originally by omegaPi 由omegaPi創建, BPM change function created by whitelava3203 BPM修改工具由whitelava3203創建
+Originally by omegaPi 由omegaPi創建, BPM change function created by whitelava3203 BPM修改工具由whitelava3203創建, Icon by Aenokoff 圖標由Aenokoff製作
 
 Supported Platforms 支援平台
 Windows (64-bit), macOS (64-bit)
+
+1.21.5 (24/1/2023)
+- New and redesigned icon 全新設計圖標 - by Aenokoff
+- Added a close prompt 添加了關閉提示
+- Added Bleed Mod for visual appearance [G] 添加Bleed Mod的視覺效果 [G]
+- Added a dynamic reactive note counter [N] 添加了動態式音符計算器 [N]
+- Added a gradient for blank background 添加漸變效果作為預設背景
+- Other visual changes 其他視覺改動
+  - Decreased centre shadow glow size 縮小中間發光的陰影
+  - Forced playView to be 60FPS to prevent significant visual differences 已限制playView最高頻率只能達到60FPS，以免出現嚴重視覺差異
+  - Fixed Hold note opacity problem 修復Hold音符透明度問題
+  - Slightly dimmed background area 背景區域略微變暗
+  - Side notes fade in transition fix 側面進入淡入效果修復
+- Other changes 其他改動
+  - Entering the playView for the first time will require the user to manually press Play instead of Pause 第一次進入playView需要用戶手動按下播放而不是暫停
+  - When opening playView, the default mode is now EDIT instead of NORMAL 當打開playView時，現在的默認模式是 EDIT 而不是 NORMAL
+  - Added a "Warn Before Closing" button in the navigation bar for the close prompt 因應關閉提示的追加，在菜單欄中添加了“關閉前警告”的按鈕
 
 1.21.4.1 (15/8/2022)
 - macOS improvements 進行macOS優化

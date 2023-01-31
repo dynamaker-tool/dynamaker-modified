@@ -131,6 +131,7 @@ loadingScene.prototype = {
 					    var dumper = new JKL.Dumper();
 					    var xmlText = this.bdReader[0].result;
 						var tree = xotree.parseXML(xmlText);
+						CMap3 = eval('(' + dumper.dump(tree) + ')');
 						CMap = eval('(' + dumper.dump(tree) + ')').CMap;
 						break;
 					
@@ -181,96 +182,158 @@ loadingScene.prototype = {
 					loaded++;
 				});
 
-				hardship = hardshipMap[CMap.m_mapID.substr(-1, 1)][0];
-				hardshipColor = hardshipMap[CMap.m_mapID.substr(-1, 1)][1];
-				
-				typeL = CMap.m_leftRegion;
-				typeR = CMap.m_rightRegion;
-				bpm = CMap.m_barPerMin;
-				spu = 60 / CMap.m_barPerMin;
-				spq = spu / 32;
-				offset = Number(CMap.m_timeOffset);
-				totalNote = 0;
-				noteDown = [];
-				if (isEmptyObject(CMap.m_notes.m_notes)) {
-					noteDown = [];
-				}
-				else if (isNaN(CMap.m_notes.m_notes.CMapNoteAsset.length)) {
-					noteDown[CMap.m_notes.m_notes.CMapNoteAsset.m_id] = $.extend(true, {}, CMap.m_notes.m_notes.CMapNoteAsset);
-					totalNote++;
-				}
-				else
-					for (var i = 0; i < CMap.m_notes.m_notes.CMapNoteAsset.length; ++i)
-						if (CMap.m_notes.m_notes.CMapNoteAsset[i]) {
-							totalNote++;
-							noteDown[CMap.m_notes.m_notes.CMapNoteAsset[i].m_id] = ($.extend(true, {}, CMap.m_notes.m_notes.CMapNoteAsset[i]));
-							noteDown[CMap.m_notes.m_notes.CMapNoteAsset[i].m_id].m_position = Number(noteDown[CMap.m_notes.m_notes.CMapNoteAsset[i].m_id].m_position) + noteDown[CMap.m_notes.m_notes.CMapNoteAsset[i].m_id].m_width/2;
-						}
-				noteLeft = [];
-				if (isEmptyObject(CMap.m_notesLeft.m_notes)) {
-					noteLeft = [];
-				}
-				else if (isNaN(CMap.m_notesLeft.m_notes.CMapNoteAsset.length)) {
-					noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset.m_id] = $.extend(true, {}, CMap.m_notesLeft.m_notes.CMapNoteAsset);
-					totalNote++;
-				}
-				else
-					for (var i = 0; i < CMap.m_notesLeft.m_notes.CMapNoteAsset.length; ++i)
-						if (CMap.m_notesLeft.m_notes.CMapNoteAsset[i]) {
-							totalNote++;
-							noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset[i].m_id] = ($.extend(true, {}, CMap.m_notesLeft.m_notes.CMapNoteAsset[i]));
-							noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset[i].m_id].m_position = Number(noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset[i].m_id].m_position) + noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset[i].m_id].m_width/2;
-						}
-				noteRight = [];
-				if (isEmptyObject(CMap.m_notesRight.m_notes)) {
-					noteRight = [];
-				}
-				else if (isNaN(CMap.m_notesRight.m_notes.CMapNoteAsset.length)) {
-					noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset.m_id] = $.extend(true, {}, CMap.m_notesRight.m_notes.CMapNoteAsset);
-					totalNote++;
-				}
-				else
-					for (var i = 0; i < CMap.m_notesRight.m_notes.CMapNoteAsset.length; ++i)
-						if (CMap.m_notesRight.m_notes.CMapNoteAsset[i]) {
-							totalNote++;
-							noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id] = ($.extend(true, {}, CMap.m_notesRight.m_notes.CMapNoteAsset[i]));
-							noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_position = Number(noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_position) + noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_width/2;
-						}
-
-
-				bpmlist = [];
-				timelist = [];
-				if(typeof CMap.m_argument == "undefined")
-				{
-					bpmlist = [];
-					timelist = [];
-					AddFirstBPM();
-				}
-				else if(typeof CMap.m_argument.m_bpmchange == "undefined")
-				{
-					bpmlist = [];
-					timelist = [];
-					AddFirstBPM();
-				}
-				else if(isEmptyObject(CMap.m_argument.m_bpmchange))
-				{
-					bpmlist = [];
-					timelist = [];
-					AddFirstBPM();
-				}
-				else
-				{
-					for (var i = 0; i < CMap.m_argument.m_bpmchange.CBpmchange.length; ++i)
-					{
-						if (CMap.m_argument.m_bpmchange.CBpmchange[i]) 
-						{
-							bpmlist[i] = ($.extend(true, {}, CMap.m_argument.m_bpmchange.CBpmchange[i]));
-							timelist[i] = ($.extend(true, {}, CMap.m_argument.m_bpmchange.CBpmchange[i]));
-						}
+				if (!CMap) {
+					CMap = {}
+					noteArray = {}
+					Chart = CMap3.DynamixMap
+					CMap.m_path = Chart['-MapID']
+					CMap.m_mapID = Chart['-MapID'].substr(5, Chart['-MapID'].length - 5)
+					CMap.m_path = CMap.m_mapID.substr(0, CMap.m_mapID.length - 2)
+					hardship = hardshipMap[Chart['-MapID'].substr(-1, 1)][0];
+					hardshipColor = hardshipMap[Chart['-MapID'].substr(-1, 1)][1];
+					typeL = Chart.Left['-Type'];
+					typeR = Chart.Right['-Type'];
+					CMap.m_leftRegion = typeL;
+					CMap.m_rightRegion = typeR;
+					bpm = Number(Chart['-BarPerMinute']);
+					spu = 60 / bpm;
+					spq = spu / 32;
+					offset = Number(Chart['-TimeOffset']);
+					// offsetSec = offsetBar/(barpm/60) + userOffsetSec;
+					let S = [{
+						xmlTag: 'Center',
+						initTag: 'Down'
+					},{
+						xmlTag: 'Left',
+						initTag: 'Left'
+					},{
+						xmlTag: 'Right',
+						initTag: 'Right'
+					}]
+					let R = {
+						'm_id': '-Index',
+						'm_subId': '-SubIndex',
+						'm_position': '-Position',
+						'm_width': '-Size',
+						'm_time': '-Time',
+						'm_type': '-Type'
 					}
-					TimelistReset();
+					for (let k = 0; k < 3; ++k) {
+						s = S[k]
+						noteArray[s.initTag] = [];
+						if (isEmptyObject(Chart[s.xmlTag].Note)) {
+							noteArray[s.initTag] = [];
+						}
+						else if (isNaN(Chart[s.xmlTag].Note.length)) {
+							var id = Chart[s.xmlTag][R.m_id]
+							noteArray[s.initTag][id] = {}
+							noteArray[s.initTag][id].m_id = id;
+							noteArray[s.initTag][id].m_type = Chart[s.xmlTag].Note[R.m_type];
+							noteArray[s.initTag][id].m_subId = Chart[s.xmlTag].Note[R.m_subId];
+							noteArray[s.initTag][id].m_width = Chart[s.xmlTag].Note[R.m_width];
+							noteArray[s.initTag][id].m_time = Chart[s.xmlTag].Note[R.m_time];
+							noteArray[s.initTag][id].m_position = Chart[s.xmlTag].Note[R.m_position];
+							noteArray[s.initTag][id].m_position = Number(noteArray[s.initTag][id].m_position) + noteArray[s.initTag][id].m_width/2;
+							totalNote++;
+						}
+						else
+							for (var i = 0; i < Chart[s.xmlTag].Note.length; ++i)
+								if (Chart[s.xmlTag].Note[i]) {
+									var id = Chart[s.xmlTag].Note[i][R.m_id]
+									noteArray[s.initTag][id] = {}
+									console.log(Chart[s.xmlTag].Note[i])
+									totalNote++;
+									noteArray[s.initTag][id].m_id = id;
+									noteArray[s.initTag][id].m_type = Chart[s.xmlTag].Note[i][R.m_type];
+									noteArray[s.initTag][id].m_subId = Chart[s.xmlTag].Note[i][R.m_subId];
+									noteArray[s.initTag][id].m_width = Chart[s.xmlTag].Note[i][R.m_width];
+									noteArray[s.initTag][id].m_time = Chart[s.xmlTag].Note[i][R.m_time];
+									noteArray[s.initTag][id].m_position = Chart[s.xmlTag].Note[i][R.m_position];
+									noteArray[s.initTag][id].m_position = Number(noteArray[s.initTag][id].m_position) + noteArray[s.initTag][id].m_width/2;
+								}
+					}
+					noteDown = $.extend(true, [], noteArray.Down);
+					noteLeft = $.extend(true, [], noteArray.Left);
+					noteRight = $.extend(true, [], noteArray.Right);
+				} else {
+
+
+					hardship = hardshipMap[CMap.m_mapID.substr(-1, 1)][0];
+					hardshipColor = hardshipMap[CMap.m_mapID.substr(-1, 1)][1];
+
+					typeL = CMap.m_leftRegion;
+					typeR = CMap.m_rightRegion;
+					bpm = CMap.m_barPerMin;
+					spu = 60 / CMap.m_barPerMin;
+					spq = spu / 32;
+					offset = Number(CMap.m_timeOffset);
+					totalNote = 0;
+					noteDown = [];
+					if (isEmptyObject(CMap.m_notes.m_notes)) {
+						noteDown = [];
+					} else if (isNaN(CMap.m_notes.m_notes.CMapNoteAsset.length)) {
+						noteDown[CMap.m_notes.m_notes.CMapNoteAsset.m_id] = $.extend(true, {}, CMap.m_notes.m_notes.CMapNoteAsset);
+						totalNote++;
+					} else
+						for (var i = 0; i < CMap.m_notes.m_notes.CMapNoteAsset.length; ++i)
+							if (CMap.m_notes.m_notes.CMapNoteAsset[i]) {
+								totalNote++;
+								noteDown[CMap.m_notes.m_notes.CMapNoteAsset[i].m_id] = ($.extend(true, {}, CMap.m_notes.m_notes.CMapNoteAsset[i]));
+								noteDown[CMap.m_notes.m_notes.CMapNoteAsset[i].m_id].m_position = Number(noteDown[CMap.m_notes.m_notes.CMapNoteAsset[i].m_id].m_position) + noteDown[CMap.m_notes.m_notes.CMapNoteAsset[i].m_id].m_width / 2;
+							}
+					noteLeft = [];
+					if (isEmptyObject(CMap.m_notesLeft.m_notes)) {
+						noteLeft = [];
+					} else if (isNaN(CMap.m_notesLeft.m_notes.CMapNoteAsset.length)) {
+						noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset.m_id] = $.extend(true, {}, CMap.m_notesLeft.m_notes.CMapNoteAsset);
+						totalNote++;
+					} else
+						for (var i = 0; i < CMap.m_notesLeft.m_notes.CMapNoteAsset.length; ++i)
+							if (CMap.m_notesLeft.m_notes.CMapNoteAsset[i]) {
+								totalNote++;
+								noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset[i].m_id] = ($.extend(true, {}, CMap.m_notesLeft.m_notes.CMapNoteAsset[i]));
+								noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset[i].m_id].m_position = Number(noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset[i].m_id].m_position) + noteLeft[CMap.m_notesLeft.m_notes.CMapNoteAsset[i].m_id].m_width / 2;
+							}
+					noteRight = [];
+					if (isEmptyObject(CMap.m_notesRight.m_notes)) {
+						noteRight = [];
+					} else if (isNaN(CMap.m_notesRight.m_notes.CMapNoteAsset.length)) {
+						noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset.m_id] = $.extend(true, {}, CMap.m_notesRight.m_notes.CMapNoteAsset);
+						totalNote++;
+					} else
+						for (var i = 0; i < CMap.m_notesRight.m_notes.CMapNoteAsset.length; ++i)
+							if (CMap.m_notesRight.m_notes.CMapNoteAsset[i]) {
+								totalNote++;
+								noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id] = ($.extend(true, {}, CMap.m_notesRight.m_notes.CMapNoteAsset[i]));
+								noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_position = Number(noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_position) + noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_width / 2;
+							}
+
+
+					bpmlist = [];
+					timelist = [];
+					if (typeof CMap.m_argument == "undefined") {
+						bpmlist = [];
+						timelist = [];
+						AddFirstBPM();
+					} else if (typeof CMap.m_argument.m_bpmchange == "undefined") {
+						bpmlist = [];
+						timelist = [];
+						AddFirstBPM();
+					} else if (isEmptyObject(CMap.m_argument.m_bpmchange)) {
+						bpmlist = [];
+						timelist = [];
+						AddFirstBPM();
+					} else {
+						for (var i = 0; i < CMap.m_argument.m_bpmchange.CBpmchange.length; ++i) {
+							if (CMap.m_argument.m_bpmchange.CBpmchange[i]) {
+								bpmlist[i] = ($.extend(true, {}, CMap.m_argument.m_bpmchange.CBpmchange[i]));
+								timelist[i] = ($.extend(true, {}, CMap.m_argument.m_bpmchange.CBpmchange[i]));
+							}
+						}
+						TimelistReset();
+					}
+
 				}
-				
 
 				onloadRun = true;
 				loaded++;		

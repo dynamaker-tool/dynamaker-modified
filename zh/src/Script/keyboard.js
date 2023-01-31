@@ -1,10 +1,13 @@
 var keysDown = {};
 var keysReacted = {};
+var lastKeydownTimes = {};
 for (var i = 0; i < 256; ++i) {
 	keysReacted[i] = 0;
 }
+
 function keyboard() {
 }
+
 function kble(i) {
 	if (i in keysDown) {
 		if (keysReacted[i] == 0) {
@@ -19,11 +22,31 @@ function kble(i) {
 		return false;
 	}
 }
+
+// Force release of modifier keys in 2 seconds
+setInterval(function() {
+	var now = +new Date();
+	for(keyCode in lastKeydownTimes) {
+		if(now - lastKeydownTimes[keyCode] >= 2000) {
+			delete keysDown[keyCode];
+		}
+	}
+}, 1000);
+
 keyboard.prototype = {
 	set:function() {
 		addEventListener("keydown", function (e) {
 			if (scene && scene.banKeyboard) return;
-			keysDown[e.keyCode] = true;
+			// Exclude modifier keys for compatibility with closing prompt
+			// For future compatibility with key combos using these modifiers,
+			// add inclusions for each key individually
+			//             LRCtrl          LMeta           LRAlt           RMeta             
+			if (! (keysDown[17] || keysDown[91] || keysDown[18] || keysDown[93])) {
+				keysDown[e.keyCode] = true;
+			}
+			if (e.keyCode === 17 || e.keyCode === 91 || e.keyCode === 18 || e.keyCode === 93) {
+				lastKeydownTimes[e.keyCode] = +new Date();
+			}
 	  //   	if (kble(70)) { // F
 	  //   		if (isFullScreen) {
 	  //   			unFullScreen();
@@ -204,8 +227,16 @@ keyboard.prototype = {
 		}
 
 		//TLC
-		if (kble(72)) {
+		if (kble(72)) { // H
 			hOn = !hOn;
+		}
+
+		if (kble(71)) { // G
+			isBleedBarGraphicOn = !isBleedBarGraphicOn;
+		}
+
+		if (kble(78)) { // N
+			noteTypeCounterShown = !noteTypeCounterShown;
 		}
 		
 		if (musicCtrl && CMap) {	    	

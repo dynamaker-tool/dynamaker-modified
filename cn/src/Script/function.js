@@ -1224,10 +1224,11 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 		}
 		switch (place) {
 			case 0:
+				//Green Bottom
 				if (hitting) {
 					var t = c.globalAlpha;
-					c.globalAlpha *= 0.7;
-					c.fillStyle = "#0F0";
+					c.globalAlpha *= 0.2;
+					c.fillStyle = "#00b700";
 					c.fillRect(x - width/2, windowHeight - ud - (height + length), width, length);
 					c.globalAlpha = t;
 				}
@@ -1238,10 +1239,11 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 				break;
 
 			case 1:
+				//Green Left
 				if (hitting) {
 					var t = c.globalAlpha;
-					c.globalAlpha *= 0.6;
-					c.fillStyle = "#0F0";
+					c.globalAlpha *= 0.1;
+					c.fillStyle = "#00b700";
 					c.fillRect(lr + height, x - width/2, length, width);
 					c.globalAlpha = t;
 				}
@@ -1252,10 +1254,11 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 				break;
 
 			case 2:
+				//Green Right
 				if (hitting) {
 					var t = c.globalAlpha;
-					c.globalAlpha *= 0.6;
-					c.fillStyle = "#0F0";
+					c.globalAlpha *= 0.1;
+					c.fillStyle = "#00b700";
 					c.fillRect(windowWidth - lr - (height + length), x - width/2, length, width);
 					c.globalAlpha = t;
 				}
@@ -1279,7 +1282,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 		case 0:
 			if (hitting) {
 				var t = c.globalAlpha;
-				c.globalAlpha *= 0.7;
+				c.globalAlpha *= 0.55;
 				c.fillStyle = "#0F0";
 				c.fillRect(x - width/2, windowHeight - ud - (height + length), width, length);
 				c.globalAlpha = t;
@@ -1359,7 +1362,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 
 			if (hitting) {
 				var t = c.globalAlpha;
-				c.globalAlpha *= 0.6;
+				c.globalAlpha *= 0.45;
 				c.fillStyle = "#0F0";
 				c.fillRect(lr + height, x - width/2, length, width);
 				c.globalAlpha = t;
@@ -1440,7 +1443,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 //			c.fillRect(windowWidth - lr - (height + length), x - width/2, length, width);
 			if (hitting) {
 				var t = c.globalAlpha;
-				c.globalAlpha *= 0.6;
+				c.globalAlpha *= 0.45;
 				c.fillStyle = "#0F0";
 				c.fillRect(windowWidth - lr - (height + length), x - width/2, length, width);
 				c.globalAlpha = t;

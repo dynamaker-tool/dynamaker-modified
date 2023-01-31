@@ -1,12 +1,3 @@
-window.onbeforeunload = function () {
-    if(confirm("Have you saved your chart? Click OK to close the window.")){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
 var BlobBuilder = Blob;
 var browser = getBrowser();
 var windowWidth = 1920;
@@ -208,6 +199,7 @@ var ctx = null;
 
 //------------- TLC Vars ------------------------//
 
+// BOOLEANS
 /** Added for mp4 Support, true if video was loaded. */
 var isVideo = false;
 
@@ -217,6 +209,11 @@ var hOn = false;
 /** Restrict Mixer Height toggle. */
 var restrictMixerHeight = true;
 
+/** Toggle Bleed Bar Graphic. */
+var isBleedBarGraphicOn = false;
+
+
+
 /** Restrict Particles to 60FPS. */
 var isParticles60FPS = true;
 // var particlesShownInFrameArr = Array.apply(null, Array(60)).map((val, i) => false);
@@ -224,6 +221,19 @@ var previousFrameWithParticles = -1;
 
 /** Display Error Messages. */
 var errorMsgContainer = [];
+
+/** GRAPHICS - Canvas and Context Variables **/
+var morePlaySrc = null;
+var bleedCanvas = null;
+var bleedContext = null;
+
+var bkgWhiteGradientSrc = null;
+var bkgWhiteGradientCanvas = null;
+var bkgWhiteGradientContext = null;
+
+/** Note Type Counter */
+var noteTypeCounterShown = false;
+
 
 //TLC Options
 /** false: Arrow keys toggle 2 options of bar lines instead of 3. The solid bar line option is left out. */
@@ -256,6 +266,14 @@ numberSrc = new Image();
 numberSrc.src = "Graphics/number.png";
 //charSrc = new Image();
 //charSrc.src = "Graphics/char2.png";
+
+// TLC- More Play Graphics
+morePlaySrc = new Image();
+morePlaySrc.src = "Graphics/morePlayGraphics.png";
+
+bkgWhiteGradientSrc = new Image();
+bkgWhiteGradientSrc.src = "Graphics/BkgWhiteGradient.png";
+
 
 blankCanvasU = document.createElement("canvas"); blankContextU = blankCanvasU.getContext("2d"); blankCanvasU.width = 160; blankCanvasU.height = 100;
 blankCanvasD = document.createElement("canvas"); blankContextD = blankCanvasD.getContext("2d"); blankCanvasD.width = 160; blankCanvasD.height = 100;
@@ -297,6 +315,11 @@ perfectShineCanvas = document.createElement("canvas"); perfectShineContext = per
 mixerShadowCanvasD = document.createElement("canvas"); mixerShadowContextD = mixerShadowCanvasD.getContext("2d"); mixerShadowCanvasD.width = 381; mixerShadowCanvasD.height = 437;
 mixerShadowCanvasL = document.createElement("canvas"); mixerShadowContextL = mixerShadowCanvasL.getContext("2d"); mixerShadowCanvasL.width = 437; mixerShadowCanvasL.height = 381;
 mixerShadowCanvasR = document.createElement("canvas"); mixerShadowContextR = mixerShadowCanvasR.getContext("2d"); mixerShadowCanvasR.width = 437; mixerShadowCanvasR.height = 381;
+
+bleedCanvas = document.createElement("canvas"); bleedContext = bleedCanvas.getContext("2d"); bleedCanvas.width = 398; bleedCanvas.height = 75;
+
+bkgWhiteGradientCanvas = document.createElement("canvas"); bkgWhiteGradientContext = bkgWhiteGradientCanvas.getContext("2d"); bkgWhiteGradientCanvas.width = 1920; bkgWhiteGradientCanvas.height = 1080;
+
 //imgLoad(mixerSrc, function() {
 //});
 
@@ -394,7 +417,19 @@ imgLoad(playSrc, function() {
 	purpleParticleContext.drawImage(playSrc, 117, 814, 116, 146, 0, 0, 116, 146);
 
 	whiteParticleContext.drawImage(playSrc, 233, 814, 116, 146, 0, 0, 116, 146);
+
+	// TLC - Cant move this into a separate imgLoad function because it affects the loaded variable
+	//bleedContext.drawImage(playSrc, 1041, 887, 264, 50, 0, 0, 264, 50);
+	bleedContext.drawImage(morePlaySrc, 0, 0, 398, 75, 0, 0, 398, 75);
+
+	bkgWhiteGradientContext.drawImage(bkgWhiteGradientSrc, 0, 0, 1920, 1080, 0, 0, 1920, 1080);
+
+
 });
+
+
+
+
 
 //imgLoad(charSrc, function() {
 //	charContext.drawImage(charSrc, 0, 0);
@@ -621,6 +656,7 @@ var main = function () {
 			ctx.fillText(errorMsgContainer[i].message.length > 150 ? errorMsgContainer[i].message.substring(0, 150) + "..." : errorMsgContainer[i].message, windowWidth / 2, (windowHeight / 8) * lineNo + windowHeight / 32);
 			ctx.fillText(errorMsgContainer[i].stack.length > 150 ? errorMsgContainer[i].stack.substring(0, 150) + "..." : errorMsgContainer[i].stack, windowWidth / 2, (windowHeight / 8) * lineNo + windowHeight / 16);
 			lineNo++;
+			console.log(errorMsgContainer[i].message);
 		}
 	}
 

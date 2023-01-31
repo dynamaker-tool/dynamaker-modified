@@ -199,7 +199,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix,NotoSans";
-			ctx.fillText("修改者： TLChicken, Jmak, Vertrak, keanucode, Jono997 和 i0nTempest", windowWidth * 0.5, windowHeight * 0.28);
+			ctx.fillText("修改者： TLChicken, i0nTempest, Jmak, Vertrak, keanucode 和 Jono997", windowWidth * 0.5, windowHeight * 0.28);
 
 			//Jmak - Changed and deleted unnecessary code
 			ctx.textAlign = "center";
@@ -229,21 +229,21 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix,NotoSans";
-			ctx.fillText("推薦使用採樣頻率 48000Hz 的 .wav 音檔以減少延遲和幀頻相關問題", windowWidth * 0.5, windowHeight * 0.80)
+			ctx.fillText("推薦使用採樣頻率 48000Hz 的音檔以減少延遲和幀頻相關問題", windowWidth * 0.5, windowHeight * 0.80)
 		}
 
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix,NotoSans";
 		ctx.textAlign = "center";
-		ctx.fillText("版本 1.21.4.1", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("版本 1.21.5", windowWidth * 0.5, windowHeight - 35);
 
 		//Jmak - Copyright Information and Special Thanks
 		ctx.fillStyle = "#0FF";
 		ctx.font = "15px Dynamix,NotoSans";
 		ctx.textAlign = "right";
-		ctx.fillText("©資產版權所有歸屬 C4Cat", windowWidth * 0.96, windowHeight * 0.05);
-		ctx.fillText("特別鳴謝：AXIS5, Syncable 和 whitelava3203", windowWidth * 0.226, windowHeight * 0.05);
-		ctx.fillText("中文翻譯：AXIS5 和 Jmak", windowWidth * 0.134, windowHeight * 0.08);
+		ctx.fillText("©資產版權所有歸屬 C4Cat", windowWidth * 0.976, windowHeight * 0.05);
+		ctx.fillText("特別鳴謝：AXIS5, Syncable, Aenokoff 和 whitelava3203", windowWidth * 0.27, windowHeight * 0.05);
+		ctx.fillText("中文翻譯：AXIS5 和 Jmak", windowWidth * 0.129, windowHeight * 0.08);
 
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";

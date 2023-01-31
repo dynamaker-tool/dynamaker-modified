@@ -199,7 +199,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix";
-			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997 and i0nTempest", windowWidth * 0.5, windowHeight * 0.28);
+			ctx.fillText("Modified by TLChicken, i0nTempest, Jmak, Vertrak, keanucode and Jono997", windowWidth * 0.5, windowHeight * 0.28);
 
 			//Jmak - Changed and deleted unnecessary code
 			ctx.textAlign = "center";
@@ -229,20 +229,20 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix";
-			ctx.fillText("48000Hz .wav is recommended to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.80)
+			ctx.fillText("48000Hz song file is recommended to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.80)
 		}
 
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
-		ctx.fillText("Version 1.21.4.1", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("Version 1.21.5", windowWidth * 0.5, windowHeight - 35);
 
 		//Jmak - Copyright Information and Special Thanks
 		ctx.fillStyle = "#0FF";
 		ctx.font = "15px Dynamix";
 		ctx.textAlign = "right";
-		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.96, windowHeight * 0.05);
-		ctx.fillText("Special thanks to AXIS5, Syncable and whitelava3203", windowWidth * 0.28, windowHeight * 0.05);
+		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.98, windowHeight * 0.05);
+		ctx.fillText("Special thanks to AXIS5, Syncable, Aenokoff and whitelava3203", windowWidth * 0.32, windowHeight * 0.05);
 
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";

@@ -2,7 +2,7 @@ var sX, sY, sW, sH, dX, dY, dW, dH;
 var showParticles = true;
 var showHitSound = false;
 var gradual = true;
-var gradualPx = 100;
+var gradualPx = 400;
 var markSecion = 0;
 var editSide = 0; //0Down 1Left 2Right
 var noteChosen = [];
@@ -76,7 +76,7 @@ playView.prototype = {
 		if (isParticles60FPS) {
 			// let currFrameNo = getFrameNumberOutOf60FromSongTime(thisTime);
 			let currFrameNo = getFrameNumberOutOf60FromMs(currDate.getMilliseconds());
-			console.log(currFrameNo);
+			// console.log(currFrameNo);
 			if (currFrameNo > previousFrameWithParticles || currFrameNo < previousFrameWithParticles) {
 				previousFrameWithParticles = currFrameNo % 60 == 59 ? -1 : currFrameNo % 60;
 			} else {
@@ -91,16 +91,16 @@ playView.prototype = {
 			//TLC - mp4 Support Addition
 			if(bg) {
 				ctx.drawImage(bgCanvas, 0, 0);
-				ctx.fillStyle = rgba(0, 0, 0, .7);
+				ctx.fillStyle = rgba(0, 0, 0, .81);
 				ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
 				if(showStart >= 0) {
 					if(showStart < 40) {
-						ctx.fillStyle = rgba(0, 0, 0, .7)
+						ctx.fillStyle = rgba(0, 0, 0, .81)
 					} else {
-						ctx.fillStyle = rgba(0, 0, 0, showStart >= 40 && showStart <= 60 ? .7 - .035 * (showStart - 40) : .7)
+						ctx.fillStyle = rgba(0, 0, 0, showStart >= 40 && showStart <= 60 ? .81 - .035 * (showStart - 40) : .81)
 					}
 				} else {
-					ctx.fillStyle = rgba(0, 0, 0, .7)
+					ctx.fillStyle = rgba(0, 0, 0, .81)
 				}
 				ctx.fillRect(0, 0, windowWidth, windowHeight)
 			} else {
@@ -114,6 +114,13 @@ playView.prototype = {
 					ctx.globalAlpha = 0.3;
 					ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
 					ctx.globalAlpha = 1
+				} else {
+					if (showCS) {
+						// TLC - White bkg gradient thing
+						if (!bg) {
+							drawMiddleImage(bkgWhiteGradientCanvas, 0, 0, 1920, 1080, windowWidth / 2, windowHeight / 2, 1);
+						}
+					}
 				}
 				ctx.fillStyle = "rgba(0,0,0,0.7)";
 				ctx.fillRect(0, windowHeight - ud, windowWidth, ud)
@@ -142,7 +149,7 @@ playView.prototype = {
 				if (between(showStart, 10, 30)) {
 					pauseShadowH = (120 + pauseShadowH*4)/5;
 				}
-				if (showStart == -1) {
+				if (showStart == -1 && modifyParticlesInNextFrame) {
 					pauseShadowH = 120;
 					lr = tlr;
 					ud = tud;
@@ -150,7 +157,9 @@ playView.prototype = {
 					resetCS();
 					musicCtrl.goplay();
 				}
-				showStart--;
+				if (modifyParticlesInNextFrame) {
+					showStart--;
+				}
 			}
 
 			if (! timerReady) {
@@ -158,8 +167,12 @@ playView.prototype = {
 				audioRate = 1;//Math.random()/10;
 				audioRateCache = 1;
 				musicCtrl.playbackRate = 1;
-				musicCtrl.volume = 1;
-				musicCtrl.goplay();
+				// Avoid blowing up people's speakers
+				musicCtrl.volume = 0.8;
+				// Do not start playing right after entering editor
+				//musicCtrl.goplay();
+				// Default to editing mode
+				mainMouse.movement = "choose";
 				var realTime = 0;
 				timer = new Date();
 				baseTime = timer.getTime();
@@ -199,8 +212,22 @@ playView.prototype = {
 			drawMiddleImage(blankCanvasU, 0, 0, 160, 100, windowWidth*(0.95 - i*0.1) , windowHeight-ud+87, 1);
 		}
 		for (var i = 1; i <= 4; ++i) {
-			drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth*(1 - i*0.1) , windowHeight-ud+51, 1);
+			if (i == 2 && showCS && isBleedBarGraphicOn) {
+				drawMiddleImage(redCanvasD, 0, 0, 160, 100, windowWidth * (1 - i * 0.1), windowHeight - ud + 51, 1);
+			} else {
+				drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth * (1 - i * 0.1), windowHeight - ud + 51, 1);
+			}
 		}
+
+		//console.log("RUNNING");
+
+
+		// TLC - Bleed Addition
+		if (showCS && isBleedBarGraphicOn) {
+			drawMiddleImage(bleedCanvas, 0, 0, 398, 75, windowWidth / 2, windowHeight * 0.6, 1);
+		}
+		//TEST: ctx.drawImage(bleedCanvas, 0, 0, 264, 50, 0, 0, 264, 50);
+
 
 
 		//comboScore
@@ -254,7 +281,7 @@ playView.prototype = {
 
 
 		ctx.globalAlpha = jb((1 - Math.abs(Math.round(thisTime / spu) - thisTime / spu) * 2) * .6 + .4, 0, 1);
-		drawJBox(ctx, 0, windowHeight - ud - 450, windowWidth, 450, windowWidth / 2, windowHeight - ud - 450, windowWidth / 2, windowHeight - ud, rgba(0, 255, 255, 0), rgba(0, 255, 255, .32));
+		drawJBox(ctx, 0, windowHeight - ud - 350, windowWidth, 350, windowWidth / 2, windowHeight - ud - 350, windowWidth / 2, windowHeight - ud, rgba(0, 255, 255, 0), rgba(0, 255, 255, .17));
 
 		//Jmak - Font, title and difficulty opacity
 		//bottomMessage
@@ -321,12 +348,21 @@ playView.prototype = {
 
 			ctx.globalAlpha = 1;
 
+			//Jmak - Bottom menu: Enlarged FPS size, decreased H size
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "26px Dynamix";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "right";
+			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
+			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 90);
+			if (musicCtrl.paused) {
+				ctx.fillStyle = "#0F0";
+			}
+
 			if (showCS) ctx.globalAlpha = 0;
 			ctx.font = "22px Dynamix";
 			ctx.fillStyle = "#FFF";
 			ctx.textAlign = "right";
-			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
-			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 80);
 			if (musicCtrl.paused) {
 				ctx.fillStyle = "#0F0";
 			}
@@ -339,26 +375,59 @@ playView.prototype = {
 			}
 			ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.82, windowHeight - 55);
 
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "18px Dynamix";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "right";
 			if (hOn) {
 				ctx.textAlign = "left";
 				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
 				//Left Region
-				ctx.fillText("(B) scroll direction", windowWidth*0.22, windowHeight - 80);
-				ctx.fillText("(Z) hold to un/lock bar", windowWidth*0.22, windowHeight - 55);
-				ctx.fillText("(X) hold to un/lock X-axis", windowWidth*0.22, windowHeight - 30);
+				ctx.fillText("(L) simple mode", windowWidth*0.26, windowHeight - 106);
+				ctx.fillText("(B) scroll direction", windowWidth*0.26, windowHeight - 80);
+				ctx.fillText("(Z) hold to un/lock bar", windowWidth*0.26, windowHeight - 55);
+				ctx.fillText("(X) hold to un/lock X-axis", windowWidth*0.26, windowHeight - 30);
 				//Middle Region
-				ctx.fillText("(←↓→)  barlines", windowWidth*0.41, windowHeight - 80);
-				ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
-				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
+				ctx.fillText("(N) note counter", windowWidth*0.45, windowHeight - 106);
+				ctx.fillText("(←↓→)  barlines", windowWidth*0.45, windowHeight - 80);
+				ctx.fillText("(C- V+) ±division", windowWidth*0.45, windowHeight - 55);
+				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.45, windowHeight - 30);
 				//Right Region
 				if (navigator.userAgent.indexOf("Mac") != -1) {
-					ctx.fillText("(Ctrl Cmd F) fullscreen", windowWidth*0.53, windowHeight - 80);
+					ctx.fillText("(Ctrl Cmd F) fullscreen", windowWidth*0.57, windowHeight - 80);
 				} else {
-					ctx.fillText("(F11) fullscreen", windowWidth*0.53, windowHeight - 80);
+					ctx.fillText("(F11) fullscreen", windowWidth*0.57, windowHeight - 80);
 				}
-				ctx.fillText("(Shift← →) un/redo", windowWidth*0.53, windowHeight - 55);
-				ctx.fillText("(L) simple mode", windowWidth*0.53, windowHeight - 30);
+				ctx.fillText("(Shift← →) un/redo", windowWidth*0.57, windowHeight - 55);
+				ctx.fillText("(G) Bleed Mod", windowWidth*0.57, windowHeight - 30);
 			}
+			//Jmak - Prevent the font of the note types numbers being affected by the help menu
+			ctx.font = "22px Dynamix";
+			//End of prevention
+
+			//Jmak - Legacy menu
+			//ctx.font = "22px Dynamix";
+			
+			// if (hOn) {
+			// 	ctx.textAlign = "left";
+			// 	ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
+			// 	//Left Region
+			// 	ctx.fillText("(B) scroll direction", windowWidth*0.22, windowHeight - 80);
+			// 	ctx.fillText("(Z) hold to un/lock bar", windowWidth*0.22, windowHeight - 55);
+			// 	ctx.fillText("(X) hold to un/lock X-axis", windowWidth*0.22, windowHeight - 30);
+			// 	//Middle Region
+			// 	ctx.fillText("(←↓→)  barlines", windowWidth*0.41, windowHeight - 80);
+			// 	ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
+			// 	ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
+			// 	//Right Region
+			// 	if (navigator.userAgent.indexOf("Mac") != -1) {
+			// 		ctx.fillText("(Ctrl Cmd F) fullscreen", windowWidth*0.53, windowHeight - 80);
+			// 	} else {
+			// 		ctx.fillText("(F11) fullscreen", windowWidth*0.53, windowHeight - 80);
+			// 	}
+			// 	ctx.fillText("(Shift← →) un/redo", windowWidth*0.53, windowHeight - 55);
+			// 	ctx.fillText("(L) simple mode", windowWidth*0.53, windowHeight - 30);
+			// }
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);
 //		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth, windowHeight - 100);
@@ -1152,7 +1221,9 @@ playView.prototype = {
 
 			//TLC - added Mixer restriction
 			//bar
-			barL = Math.round((barL + barTargetL)/2);
+			if (modifyParticlesInNextFrame) {
+				barL = Math.round((barL + barTargetL) / 2);
+			}
 			if (barL < 198) {
 				barL = 198;
 			}
@@ -1161,7 +1232,10 @@ playView.prototype = {
 			} else if (barL > 858 && restrictMixerHeight) {
 				barL = 858;
 			}
-			barR = Math.round((barR + barTargetR)/2);
+
+			if (modifyParticlesInNextFrame) {
+				barR = Math.round((barR + barTargetR) / 2);
+			}
 			if (barR < 198) {
 				barR = 198;
 			}
@@ -1190,6 +1264,119 @@ playView.prototype = {
 
 			//shadowAnime 0frame 1maxframe 234567 x1y1d1x2y2d2 type
 
+
+		}
+
+		// TLC - Note Type Counter
+		if (noteTypeCounterShown) {
+			var normalNoteCount = [0, 0, 0];
+			var holdNoteCount = [0, 0, 0];
+			var chainNoteCount = [0, 0, 0];
+			var subNoteCount = [0, 0, 0];
+
+			// Calculate total number of each note type on each side
+			for (var i = 0; i < noteDown.length; ++i) {
+				if (!noteDown[i]) {
+					continue;
+				}
+
+				var currNote = noteDown[i];
+				switch (currNote.m_type) {
+					case "NORMAL":
+						normalNoteCount[0] = normalNoteCount[0] + 1;
+						break;
+					case "HOLD":
+						holdNoteCount[0] = holdNoteCount[0] + 1;
+						break;
+					case "CHAIN":
+						chainNoteCount[0] = chainNoteCount[0] + 1;
+						break;
+					case "SUB":
+						subNoteCount[0] = subNoteCount[0] + 1;
+						break;
+				}
+			}
+
+			for (var i = 0; i < noteLeft.length; ++i) {
+				if (!noteLeft[i]) {
+					continue;
+				}
+
+				var currNote = noteLeft[i];
+				switch (currNote.m_type) {
+					case "NORMAL":
+						normalNoteCount[1] = normalNoteCount[1] + 1;
+						break;
+					case "HOLD":
+						holdNoteCount[1] = holdNoteCount[1] + 1;
+						break;
+					case "CHAIN":
+						chainNoteCount[1] = chainNoteCount[1] + 1;
+						break;
+					case "SUB":
+						subNoteCount[1] = subNoteCount[1] + 1;
+						break;
+				}
+			}
+
+			for (var i = 0; i < noteRight.length; ++i) {
+				if (!noteRight[i]) {
+					continue;
+				}
+
+				var currNote = noteRight[i];
+				switch (currNote.m_type) {
+					case "NORMAL":
+						normalNoteCount[2] = normalNoteCount[2] + 1;
+						break;
+					case "HOLD":
+						holdNoteCount[2] = holdNoteCount[2] + 1;
+						break;
+					case "CHAIN":
+						chainNoteCount[2] = chainNoteCount[2] + 1;
+						break;
+					case "SUB":
+						subNoteCount[2] = subNoteCount[2] + 1;
+						break;
+				}
+			}
+
+			var totalNormalNotes = normalNoteCount.reduce(
+				(acc, currVal) => acc + currVal, 0
+			);
+
+			var totalHoldNotes = holdNoteCount.reduce(
+				(acc, currVal) => acc + currVal, 0
+			);
+
+			var totalChainNotes = chainNoteCount.reduce(
+				(acc, currVal) => acc + currVal, 0
+			);
+
+			var totalSubNotes = subNoteCount.reduce(
+				(acc, currVal) => acc + currVal, 0
+			);
+
+			var totalNotes = totalNormalNotes + totalHoldNotes + totalChainNotes + totalSubNotes;
+
+			// console.log("Total Normal Notes: " + totalNormalNotes.toString());
+			// console.log("Total Hold Notes: " + totalHoldNotes.toString());
+			// console.log("Total Chain Notes: " + totalChainNotes.toString());
+			// console.log("\nTotal Notes: " + totalNotes.toString() + "\n");
+
+			// Draw Note Icons
+			drawSingleNote(ctx, 0, 0.7 * 300 - 30, mtox(1.5, 0), 550);
+
+			drawLongNote(ctx, 0, 0.7 * 300 - 30,100, mtox(2.5, 0), 550, 0, true);
+			drawLongBoxNote(ctx, 0, 0.7 * 300 - 30,100, mtox(2.5, 0), 550);
+
+			drawSlideNote(ctx, 0, 0.7 * 300 - 30, mtox(3.5, 0), 550);
+
+			// drawNumber(combo, "left", (hitThisFrame > 0 ? 0.58 : 0.48), (hitThisFrame > 0 ? windowWidth*0.89 : windowWidth*0.88),  windowHeight*0.54);
+
+			drawNumber(totalNormalNotes, "center", 0.3, mtox(1.5, 0) + 30,  500);
+			drawNumber(totalHoldNotes, "center", 0.3, mtox(2.5, 0) + 30,  500);
+			drawNumber(totalChainNotes, "center", 0.3, mtox(3.5, 0) + 30,  500);
 
 		}
 
@@ -1508,7 +1695,8 @@ playView.prototype = {
 					}
 
 					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
-						hitSoundGainNode.gain.value = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
+						// Hitsound volume: default to the same as music volume
+						hitSoundGainNode.gain.value = showHitSound ? Math.round((mainMouse.coordinate.x - rx)/400*100)/100 : musicCtrl.volume;
 					} else if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 606, ry + 644) && musicCtrl) {
 						musicCtrl.volume = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
 					}

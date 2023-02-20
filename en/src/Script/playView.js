@@ -91,16 +91,16 @@ playView.prototype = {
 			//TLC - mp4 Support Addition
 			if(bg) {
 				ctx.drawImage(bgCanvas, 0, 0);
-				ctx.fillStyle = rgba(0, 0, 0, .81);
+				ctx.fillStyle = rgba(0, 0, 0, .75);
 				ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
 				if(showStart >= 0) {
 					if(showStart < 40) {
-						ctx.fillStyle = rgba(0, 0, 0, .81)
+						ctx.fillStyle = rgba(0, 0, 0, .75)
 					} else {
-						ctx.fillStyle = rgba(0, 0, 0, showStart >= 40 && showStart <= 60 ? .81 - .035 * (showStart - 40) : .81)
+						ctx.fillStyle = rgba(0, 0, 0, showStart >= 40 && showStart <= 60 ? .75 - .035 * (showStart - 40) : .75)
 					}
 				} else {
-					ctx.fillStyle = rgba(0, 0, 0, .81)
+					ctx.fillStyle = rgba(0, 0, 0, .75)
 				}
 				ctx.fillRect(0, 0, windowWidth, windowHeight)
 			} else {

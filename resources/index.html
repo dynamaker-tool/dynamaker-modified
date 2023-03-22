@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en" >
+
+<!-- Mirrored from dynaremix.omegapigame.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Jun 2018 08:59:41 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <title>DynaMaker 1.21.5</title>
+	<style>
+		body {
+			overflow: hidden;
+		}
+	</style>
+	<link rel="stylesheet" href="index.css">
+</head>
+<link rel="shortcut icon" type="image/x-icon" href="DynaMaker.ico">
+<body style="background-color:#000; height: 100%; width: 100%; margin: 0; padding: 0;">
+	<div id="game"></div>
+	<button id="goplay" onclick="musicCtrl.play()" style="display: none;"></button>
+	<input id="musicName" type="text" value="Your new map's name" style="position: absolute; width:1500px; height:100px; font-size:50px;color:rgb(255,255,255);left:200px; top:100px; display: none; background-color: rgb(25,25,25); text-align:center;"></input>
+	<input id="bpm" type="text" value="Your new map's bpm" style="position: absolute; width:600px; height:100px; font-size:50px;color:rgb(255,255,255);left:1100px; top:300px; display: none; background-color: rgb(25,25,25); text-align:center;"></input>
+	<input id="offset" type="text" value="Your new map's bpm" style="position: absolute; width:600px; height:100px; font-size:50px;color:rgb(255,255,255);left:1100px; top:500px; display: none; background-color: rgb(25,25,25); text-align:center;"></input>
+	<select id="hardship" style="position: absolute; width:600px; height:100px; font-size:50px;color:rgb(255,255,255);left:200px; top:500px; display: none; background-color: rgb(25,25,25);">
+		<option value="CASUAL">CASUAL</option>
+	    <option value="NORMAL">NORMAL</option>
+	    <option value="HARD">HARD</option>
+	    <option value="MEGA">MEGA</option>
+	    <option value="GIGA">GIGA</option>
+	    <option value="TERA">TERA</option>
+		<option value="HORNEEE">HORNEEE</option>
+		<option value="CUSTOM">NONE</option>
+	</select>
+	<select id="left" style="position: absolute; width:600px; height:100px; font-size:50px;color:rgb(255,255,255);left:200px; top:700px; display: none; background-color: rgb(25,25,25);">
+		<option value="MIXER">MIXER</option>
+	    <option value="PAD">PAD</option>
+	    <option value="MULTI">MULTI</option>
+	</select>
+	<select id="right" style="position: absolute; width:600px; height:100px; font-size:50px;color:rgb(255,255,255);left:1100px; top:700px; display: none; background-color: rgb(25,25,25);">
+	    <option value="PAD">PAD</option>
+		<option value="MIXER">MIXER</option>
+	    <option value="MULTI">MULTI</option>
+	</select>
+</body>
+
+<!-- Mirrored from dynaremix.omegapigame.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Jun 2018 08:59:42 GMT -->
+</html>
+<script type="text/javascript" src="js/neutralino.js"></script>
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/ObjTree.js"></script>
+<script type="text/javascript" src="js/jkl-dumper.js"></script>
+<script type="text/javascript" src="js/webAudioContext.js"></script>
+<script type="text/javascript" src="js/keyboard.js"></script>
+<script type="text/javascript" src="js/mouse.js"></script>
+<script type="text/javascript" src="js/fpsWatcher.js"></script>
+<script type="text/javascript" src="js/function.js"></script>
+<script type="text/javascript" src="js/startMenuScene.js"></script>
+<script type="text/javascript" src="js/settingsForNewMapScene.js"></script>
+<script type="text/javascript" src="js/loadingScene.js"></script>
+<script type="text/javascript" src="js/playView.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/BPMpopup.js"></script>

@@ -1,2 +1,15 @@
-app/src/.idea/*
-app/node_modules
+# Developer tools' files
+.lite_workspace.lua
+
+# Neutralinojs binaries and builds
+/bin
+/dist
+# Neutralinojs client (minified)
+neutralino.js
+
+# Neutralinojs related files
+.storage
+*.log
+
+#
+/.tmp

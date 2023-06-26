@@ -5,6 +5,7 @@ BUNDLEID=com.jmakxd.DynaMaker
 COPYRIGHT="Copyright © 2019-2023 omegaPi"
 OUTDIR=build
 
+cd "$(dirname "$0")"
 echo "Building App Bundle..."
 ./app/node_modules/.bin/electron-packager ./app/ \
     --app-bundle-id="$BUNDLEID" \

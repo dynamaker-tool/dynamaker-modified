@@ -1,2 +1,4 @@
 app/src/.idea/*
 app/node_modules
+app/dist
+build

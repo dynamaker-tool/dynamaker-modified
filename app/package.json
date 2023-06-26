@@ -1,5 +1,6 @@
 {
   "name": "dynamaker",
+  "productName": "DynaMaker",
   "version": "1.21.5",
   "description": "DynaMaker",
   "main": "src/index.js",
@@ -27,7 +28,8 @@
   "homepage": "https://github.com/jmakxd/dynamaker-modified#readme",
   "devDependencies": {
     "electron": "^13.1.8",
-    "electron-builder": "^23.6.0"
+    "electron-builder": "^23.6.0",
+    "electron-packager": "^17.1.1"
   },
   "build": {
     "appId": "com.jmakxd.dynamaker-modified",

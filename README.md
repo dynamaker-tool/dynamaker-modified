@@ -1,4 +1,4 @@
-<p align="center"><img src="https://media.discordapp.net/attachments/984498218400374875/1056956828950462585/DynaMaker1.21.5_New.png" style="display:block; margin:auto; width:200px"></p>
+<p align="center"><img src="https://cdn.discordapp.com/attachments/984498218400374875/1056956828950462585/DynaMaker1.21.5_New.png?ex=667cdc81&is=667b8b01&hm=598d744805bd06cab8bef55779a32bc991e77f184bc671b6c640f1e9c161d6f2&" style="display:block; margin:auto; width:200px"></p>
 
 <h1 align="center">DynaMaker</h1>
 <p align="center">A charting tool for creating charts for Dynamix and Dynamite, originally created by omegaPi. </b></p>
